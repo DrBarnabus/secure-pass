@@ -1,0 +1,57 @@
+{
+  "name": "secure-pass",
+  "version": "0.1.0",
+  "description": "State of the art password hashing and one time password reset token generation module written in TypeScript for nodejs.",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "lint": "tslint -c tslint.json 'src/**/*.ts'",
+    "pretest": "yarn lint",
+    "test": "jest",
+    "build": "tsc",
+    "prepublishonly": "yarn build"
+  },
+  "dependencies": {
+    
+  },
+  "devDependencies": {
+    
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "testRegex": "(__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "bail": true,
+    "testEnvironment": "node",
+    "collectCoverage": true,
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/dist/"
+    ]
+  },
+  "repository": "github:DrBarnabus/secure-password",
+  "author": "DrBarnabus <drbarnabus@drbarnabus.com> (https://drbarnabus.com)",
+  "license": "MIT",
+  "keywords": [
+    "secure",
+    "password",
+    "hashing",
+    "libsodium",
+    "argon",
+    "argon2",
+    "argon2id",
+    "reset",
+    "onetime",
+    "token",
+    "typescript"
+  ]
+}
