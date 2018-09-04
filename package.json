@@ -11,11 +11,14 @@
     "build": "tsc",
     "prepublishonly": "yarn build"
   },
-  "dependencies": {
-    
-  },
+  "dependencies": {},
   "devDependencies": {
-    
+    "@types/jest": "^23.3.1",
+    "@types/supertest": "^2.0.5",
+    "jest": "^23.5.0",
+    "ts-jest": "^23.1.4",
+    "tslint": "^5.11.0",
+    "typescript": "^3.0.3"
   },
   "jest": {
     "transform": {
