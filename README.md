@@ -1,5 +1,5 @@
 # secure-pass - Introduction
-This module is a wrapper for [libsodium]'s implementation of the Argon2ID hashing algorithm. This module also provides a facility for generating secure 1 time use password reset tokens for use in your own password reset logic.
+This module is a wrapper for [libsodium]'s implementation of the Argon2ID hashing algorithm. This module also provides a facility for generating secure one time use password reset tokens for use in your own password reset logic.
 
 # Features
 
