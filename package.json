@@ -11,7 +11,9 @@
     "build": "tsc",
     "prepublishonly": "yarn build"
   },
-  "dependencies": {},
+  "dependencies": {
+    "sodium-native": "^2.2.1"
+  },
   "devDependencies": {
     "@types/jest": "^23.3.1",
     "@types/supertest": "^2.0.5",
