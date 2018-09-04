@@ -103,7 +103,11 @@ export class SecurePass {
         this.memLimit = options.memLimit;
       } else {
         // tslint:disable-next-line:max-line-length
-        throw new Error(`SecurePass: Invalid Memory Limit Configured. Value must be between ${SecurePass.MemLimitMinimum} and ${SecurePass.MemLimitMaximum}`);
+        throw new Error(
+          `SecurePass: Invalid Memory Limit Configured. Value must be between ${SecurePass.MemLimitMinimum} and ${
+            SecurePass.MemLimitMaximum
+          }`
+        );
       }
     }
 
@@ -116,9 +120,27 @@ export class SecurePass {
         this.opsLimit = options.opsLimit;
       } else {
         // tslint:disable-next-line:max-line-length
-        throw new Error(`Secure Pass: Invalid Operations Limit Configured. Value must be between ${SecurePass.OpsLimitMinimum} and ${SecurePass.OpsLimitMaximum}`);
+        throw new Error(
+          `Secure Pass: Invalid Operations Limit Configured. Value must be between ${SecurePass.OpsLimitMinimum} and ${
+            SecurePass.OpsLimitMaximum
+          }`
+        );
       }
     }
+  }
+
+  /**
+   * Returns the currently configured Memory Limit.
+   */
+  public getMemLimit(): number {
+    return this.memLimit;
+  }
+
+  /**
+   * Returns the currently configured Operations Limit.
+   */
+  public getOpsLimit(): number {
+    return this.opsLimit;
   }
 }
 
