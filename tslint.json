@@ -1,0 +1,22 @@
+{
+  "defaultSeverity": "error",
+  "extends": [
+      "tslint:recommended"
+  ],
+  "jsRules": {},
+  "rules": {
+      "max-line-length": {
+          "options": [120]
+      },
+      "quotemark": {
+          "options": ["single"]
+      },
+      "interface-name": {
+          "options": "never-prefix"
+      },
+      "triple-equals": false,
+      "trailing-comma": false,
+      "arrow-parens": false
+  },
+  "rulesDirectory": []
+}
