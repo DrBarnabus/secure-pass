@@ -182,6 +182,11 @@ export class SecurePass {
     return this.opsLimit;
   }
 
+  /**
+   * Takes the provided password buffer and returns a Argon2ID hash.
+   * @param password - The password buffer to be hashed.
+   * @param callback - Optional callback function.
+   */
   public hashPassword(password: Buffer): Promise<Buffer>;
   public hashPassword(password: Buffer, callback: HashPasswordCallback): void;
   public hashPassword(password: Buffer, callback?: HashPasswordCallback): Promise<Buffer> | void {
