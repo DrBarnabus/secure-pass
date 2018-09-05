@@ -24,9 +24,9 @@ SecurePass is a module for the creation of hashes from passwords, allowing you t
 
 **Coming Soon**
 
-# Credits
+# Acknowledgements
 
-**Coming Soon**
+- Special thanks to the creators of [libsodium] and [sodium-native] both of which are used extensively in this package, and which the creation of this module wouldn't have been possible.
 
 # Licence
 Licensed under [MIT](./LICENSE).
@@ -36,5 +36,6 @@ Copyright (C) 2018 DrBarnabus
 <!-- Links -->
 [libsodium]: https://download.libsodium.org/doc/
 [Argon2ID]: https://en.wikipedia.org/wiki/Argon2
+[sodium-native]: https://github.com/sodium-friends/sodium-native
 
 <!-- Badges -->
