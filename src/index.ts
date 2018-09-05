@@ -17,6 +17,13 @@ export interface SecurePassOptions {
 
 export type HashPasswordCallback = (err: SecurePassError | null, hash?: Buffer) => void;
 
+export enum VerificationResult {
+  InvalidOrUnrecognized,
+  Invalid,
+  Valid,
+  ValidNeedsRehash
+}
+
 export class SecurePass {
   /**
    * Minimum Length for the Password input buffer.

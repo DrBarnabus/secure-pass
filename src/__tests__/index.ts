@@ -1,5 +1,5 @@
 import sodium from 'sodium-native';
-import { SecurePass, SecurePassError, SecurePassOptionsError } from '../';
+import { SecurePass, SecurePassError, SecurePassOptionsError, VerificationResult } from '../';
 
 describe('SecurePass - Constants', () => {
   test('PasswordBytes* Constants should be defined.', () => {
@@ -31,6 +31,13 @@ describe('SecurePass - Constants', () => {
     expect(SecurePass.OpsLimitSensitive).toBeDefined();
     expect(SecurePass.OpsLimitMinimum).toBeDefined();
     expect(SecurePass.OpsLimitMaximum).toBeDefined();
+  });
+
+  test('VerificationResult.* Enum Constants should be defined.', () => {
+    expect(VerificationResult.InvalidOrUnrecognized).toEqual(0);
+    expect(VerificationResult.Invalid).toEqual(1);
+    expect(VerificationResult.Valid).toEqual(2);
+    expect(VerificationResult.ValidNeedsRehash).toEqual(3);
   });
 });
 
