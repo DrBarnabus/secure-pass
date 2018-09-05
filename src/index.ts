@@ -16,6 +16,7 @@ export interface SecurePassOptions {
 }
 
 export type HashPasswordCallback = (err: SecurePassError | null, hash?: Buffer) => void;
+export type VerifyHashCallback = (err: SecurePassError | null, result?: VerificationResult) => void;
 
 export enum VerificationResult {
   InvalidOrUnrecognized,
@@ -204,6 +205,21 @@ export class SecurePass {
     }
   }
 
+  /**
+   * Takes the provided password buffer and the hash buffer and returns the result of the verification.
+   * @param password - The password buffer to be verified.
+   * @param hash - The has buffer to be verified agains.
+   */
+  public verifyHash(password: Buffer, hash: Buffer): Promise<VerificationResult>;
+  public verifyHash(password: Buffer, hash: Buffer, callback: VerifyHashCallback): void;
+  public verifyHash(password: Buffer, hash: Buffer, callback?: VerifyHashCallback): Promise<VerificationResult> | void {
+    if (callback) {
+      this.verifyHashAsync(password, hash).then(r => callback(null, r), e => callback(e));
+    } else {
+      return this.verifyHashAsync(password, hash);
+    }
+  }
+
   private async hashPasswordAsync(password: Buffer): Promise<Buffer> {
     return new Promise<Buffer>((resolve, reject) => {
       if (!(password.length > SecurePass.PasswordBytesMin && password.length < SecurePass.PasswordBytesMax)) {
@@ -225,6 +241,48 @@ export class SecurePass {
         });
       }
     });
+  }
+
+  private async verifyHashAsync(password: Buffer, hash: Buffer): Promise<VerificationResult> {
+    return new Promise<VerificationResult>((resolve, reject) => {
+      if (!(password.length > SecurePass.PasswordBytesMin && password.length < SecurePass.PasswordBytesMax)) {
+        reject(
+          new SecurePassError(
+            `Length of Password Buffer must be between ${SecurePass.PasswordBytesMin} and ${
+              SecurePass.PasswordBytesMax
+            }`
+          )
+        );
+      }
+
+      if (hash.length != SecurePass.HashBytes) {
+        reject(new SecurePassError(`Length of Hash Buffer must be between ${SecurePass.HashBytes}`));
+      }
+
+      if (!this.recognizedAlgorithm(hash)) {
+        resolve(VerificationResult.InvalidOrUnrecognized);
+      }
+
+      sodium.crypto_pwhash_str_verify_async(hash, password, (err: Error, result: boolean) => {
+        if (err) {
+          reject(err);
+        }
+
+        if (!result) {
+          resolve(VerificationResult.Invalid);
+        }
+
+        if (sodium.crypto.pwhash_str_needs_rehash(hash, this.opsLimit, this.memLimit)) {
+          resolve(VerificationResult.ValidNeedsRehash);
+        }
+
+        resolve(VerificationResult.Valid);
+      });
+    });
+  }
+
+  private recognizedAlgorithm(hash: Buffer): boolean {
+    return hash.indexOf('$argon2i$') > -1 || hash.indexOf('$argon2id$') > -1;
   }
 }
 
