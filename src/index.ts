@@ -1,4 +1,7 @@
 import sodium from 'sodium-native';
+import { SecurePassOptionsError } from './error';
+
+export { SecurePassOptionsError };
 
 export interface SecurePassOptions {
   /**
@@ -137,7 +140,7 @@ export class SecurePass {
         this.memLimit = options.memLimit;
       } else {
         // tslint:disable-next-line:max-line-length
-        throw new Error(
+        throw new SecurePassOptionsError(
           `SecurePass: Invalid Memory Limit Configured. Value must be between ${SecurePass.MemLimitMinimum} and ${
             SecurePass.MemLimitMaximum
           }`
@@ -154,7 +157,7 @@ export class SecurePass {
         this.opsLimit = options.opsLimit;
       } else {
         // tslint:disable-next-line:max-line-length
-        throw new Error(
+        throw new SecurePassOptionsError(
           `Secure Pass: Invalid Operations Limit Configured. Value must be between ${SecurePass.OpsLimitMinimum} and ${
             SecurePass.OpsLimitMaximum
           }`

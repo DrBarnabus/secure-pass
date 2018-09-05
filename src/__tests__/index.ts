@@ -1,5 +1,5 @@
 import sodium from 'sodium-native';
-import { SecurePass } from '../';
+import { SecurePass, SecurePassOptionsError } from '../';
 
 describe('SecurePass - Constants', () => {
   test('PasswordBytes* Constants should be defined.', () => {
@@ -98,6 +98,7 @@ describe('SecurePass - Options', () => {
       });
     } catch (e) {
       expect(e).toBeDefined();
+      expect(e instanceof SecurePassOptionsError).toBeTruthy();
     }
   });
 
@@ -108,6 +109,7 @@ describe('SecurePass - Options', () => {
       });
     } catch (e) {
       expect(e).toBeDefined();
+      expect(e instanceof SecurePassOptionsError).toBeTruthy();
     }
   });
 });
