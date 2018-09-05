@@ -148,17 +148,19 @@ describe('SecurePass - Functions', () => {
   });
 
   describe('callback hashPassword()', () => {
-    test('Should return a string if given a valid password buffer.', () => {
+    test('Should return a string if given a valid password buffer.', done => {
       const sp = new SecurePass();
 
       const password = Buffer.from('SecurePass');
       sp.hashPassword(password, (err: SecurePassError | null, hash?: Buffer) => {
         expect(err).toBeNull();
         expect(hash).toBeDefined();
+
+        done();
       });
     });
 
-    test('Should return an error if given a blank password buffer.', () => {
+    test('Should return an error if given a blank password buffer.', done => {
       const sp = new SecurePass();
 
       const password = Buffer.from('');
@@ -166,6 +168,220 @@ describe('SecurePass - Functions', () => {
         expect(err).toBeDefined();
         expect(err instanceof SecurePassError).toBeTruthy();
         expect(hash).toBeUndefined();
+
+        done();
+      });
+    });
+  });
+
+  describe('async/promise verifyHash()', () => {
+    test('Should correctly verify a valid hashed password.', async () => {
+      const sp = new SecurePass();
+
+      const password = Buffer.from('SecurePass');
+      const hash = await sp.hashPassword(password);
+
+      const result = await sp.verifyHash(password, hash);
+
+      expect(result).toBeDefined();
+      expect(result).toEqual(VerificationResult.Valid);
+    });
+
+    test('Should correctly rehash passwords.', async () => {
+      const wsp = new SecurePass({
+        memLimit: SecurePass.MemLimitDefault,
+        opsLimit: SecurePass.OpsLimitDefault
+      });
+
+      const userPassword = Buffer.from('SecurePass');
+      const wrongPassword = Buffer.from('SecurePass2');
+
+      const weakHash = await wsp.hashPassword(userPassword);
+      const weakValid = await wsp.verifyHash(userPassword, weakHash);
+      expect(weakValid).toEqual(VerificationResult.Valid);
+
+      const weakInvalid = await wsp.verifyHash(wrongPassword, weakHash);
+      expect(weakInvalid).toEqual(VerificationResult.Invalid);
+
+      const bsp = new SecurePass({
+        memLimit: SecurePass.MemLimitDefault + 1024,
+        opsLimit: SecurePass.OpsLimitDefault + 1
+      });
+
+      const rehashValid = await bsp.verifyHash(userPassword, weakHash);
+      expect(rehashValid).toEqual(VerificationResult.ValidNeedsRehash);
+
+      const betterHash = await bsp.hashPassword(userPassword);
+      const betterValid = await bsp.verifyHash(userPassword, betterHash);
+      expect(betterValid).toEqual(VerificationResult.Valid);
+
+      const betterInvalid = await bsp.verifyHash(wrongPassword, betterHash);
+      expect(betterInvalid).toEqual(VerificationResult.Invalid);
+    });
+
+    test('Should return an error if given a blank password buffer.', async () => {
+      const sp = new SecurePass();
+
+      try {
+        const password = Buffer.from('');
+        const hash = Buffer.alloc(SecurePass.HashBytes);
+        const result = await sp.verifyHash(password, hash);
+      } catch (e) {
+        expect(e).toBeDefined();
+        expect(e instanceof SecurePassError).toBeTruthy();
+      }
+    });
+
+    test('Should return an error if given a blank hash buffer.', async () => {
+      const sp = new SecurePass();
+
+      try {
+        const password = Buffer.from('SecurePass');
+        const hash = Buffer.from('');
+        const result = await sp.verifyHash(password, hash);
+      } catch (e) {
+        expect(e).toBeDefined();
+        expect(e instanceof SecurePassError).toBeTruthy();
+      }
+    });
+  });
+
+  describe('callback verifyHash()', () => {
+    test('Should correctly verify a valid hashed password.', done => {
+      const sp = new SecurePass();
+
+      const password = Buffer.from('SecurePass');
+      sp.hashPassword(password, (err: SecurePassError | null, hash?: Buffer) => {
+        if (hash == undefined) {
+          expect(hash).toBeDefined();
+          return;
+        }
+
+        const passwordHash = hash;
+        sp.verifyHash(password, passwordHash, (verifyError: SecurePassError | null, result?: VerificationResult) => {
+          expect(verifyError).toBeNull();
+          expect(result).toEqual(VerificationResult.Valid);
+
+          done();
+        });
+      });
+    });
+
+    test('Should correctly rehash passwords.', done => {
+      const wsp = new SecurePass({
+        memLimit: SecurePass.MemLimitDefault,
+        opsLimit: SecurePass.OpsLimitDefault
+      });
+
+      const bsp = new SecurePass({
+        memLimit: SecurePass.MemLimitDefault + 1024,
+        opsLimit: SecurePass.OpsLimitDefault + 1
+      });
+
+      const userPassword = Buffer.from('SecurePass');
+      const wrongPassword = Buffer.from('SecurePass2');
+
+      wsp.hashPassword(userPassword, (err1: SecurePassError | null, weakHash?: Buffer) => {
+        if (weakHash == undefined) {
+          expect(weakHash).toBeDefined();
+          return;
+        }
+
+        expect(err1).toBeNull();
+
+        wsp.verifyHash(userPassword, weakHash, (err2: SecurePassError | null, weakValid?: VerificationResult) => {
+          if (weakValid == undefined) {
+            expect(weakValid).toBeDefined();
+            return;
+          }
+
+          expect(err2).toBeNull();
+          expect(weakValid).toEqual(VerificationResult.Valid);
+
+          wsp.verifyHash(wrongPassword, weakHash, (err3: SecurePassError | null, weakInvalid?: VerificationResult) => {
+            if (weakInvalid == undefined) {
+              expect(weakInvalid).toBeDefined();
+              return;
+            }
+
+            expect(err3).toBeNull();
+            expect(weakInvalid).toEqual(VerificationResult.Invalid);
+
+            bsp.verifyHash(userPassword, weakHash, (err4: SecurePassError | null, rehashValid?: VerificationResult) => {
+              if (rehashValid == undefined) {
+                expect(rehashValid).toBeDefined();
+                return;
+              }
+
+              expect(err4).toBeNull();
+              expect(rehashValid).toEqual(VerificationResult.ValidNeedsRehash);
+
+              bsp.hashPassword(userPassword, (err5: SecurePassError | null, betterHash?: Buffer) => {
+                if (betterHash == undefined) {
+                  expect(betterHash).toBeDefined();
+                  return;
+                }
+
+                expect(err5).toBeNull();
+
+                bsp.verifyHash(
+                  userPassword,
+                  betterHash,
+                  (err6: SecurePassError | null, betterValid?: VerificationResult) => {
+                    if (betterValid == undefined) {
+                      expect(betterHash).toBeDefined();
+                      return;
+                    }
+
+                    expect(err6).toBeNull();
+                    expect(betterValid).toEqual(VerificationResult.Valid);
+
+                    bsp.verifyHash(
+                      wrongPassword,
+                      betterHash,
+                      (err7: SecurePassError | null, betterInvalid?: VerificationResult) => {
+                        if (betterInvalid == undefined) {
+                          expect(betterInvalid).toBeDefined();
+                          return;
+                        }
+
+                        expect(err7).toBeNull();
+                        expect(betterInvalid).toEqual(VerificationResult.Invalid);
+                        done();
+                      }
+                    );
+                  }
+                );
+              });
+            });
+          });
+        });
+      });
+    });
+
+    test('Should return an error if given a blank password buffer.', done => {
+      const sp = new SecurePass();
+
+      const password = Buffer.from('');
+      const hash = Buffer.alloc(SecurePass.HashBytes);
+      sp.verifyHash(password, hash, (err: SecurePassError | null, result?: VerificationResult) => {
+        expect(err).toBeDefined();
+        expect(err instanceof SecurePassError).toBeTruthy();
+
+        done();
+      });
+    });
+
+    test('Should return an error if given a blank hash buffer.', done => {
+      const sp = new SecurePass();
+
+      const password = Buffer.from('SecurePass');
+      const hash = Buffer.from('');
+      sp.verifyHash(password, hash, (err: SecurePassError | null, result?: VerificationResult) => {
+        expect(err).toBeDefined();
+        expect(err instanceof SecurePassError).toBeTruthy();
+
+        done();
       });
     });
   });

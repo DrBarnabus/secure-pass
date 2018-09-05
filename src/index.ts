@@ -234,6 +234,7 @@ export class SecurePass {
 
       const hash = Buffer.allocUnsafe(SecurePass.HashBytes);
       sodium.crypto_pwhash_str_async(hash, password, this.opsLimit, this.memLimit, (err: Error) => {
+        /* istanbul ignore if */
         if (err) {
           reject(err);
         } else {
@@ -264,6 +265,7 @@ export class SecurePass {
       }
 
       sodium.crypto_pwhash_str_verify_async(hash, password, (err: Error, result: boolean) => {
+        /* istanbul ignore if */
         if (err) {
           reject(err);
         }
