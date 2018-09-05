@@ -1,5 +1,6 @@
 # secure-pass - Introduction
-This module is a wrapper for [libsodium]'s implementation of the Argon2ID hashing algorithm. This module also provides a facility for generating secure one time use password reset tokens for use in your own password reset logic.
+
+SecurePass is a module for the creation of hashes from passwords, allowing you to store passwords securely. The module also provides a facility for the generation and verification of one time use password reset tokens for use in your own password reset flows. This module is a wrapper for [libsodium]'s implementation of the [Argon2ID] password hashing algorithm.
 
 # Features
 
@@ -7,7 +8,9 @@ This module is a wrapper for [libsodium]'s implementation of the Argon2ID hashin
 - Uses <code>Buffer</code>'s for safer memory management.
 - Allows for generation of one time use password reset tokens to be used in your own password reset flow.
 - Easily configurable work factors, allowing you to increase the security of your hashes over time.
+- Three default difficulty configurations for password hashing, as defined in [libsodium]'s implementation.
 - Simple rehashing of passwords you are already storing. Allowing you to improve the security of your hashes over time.
+- The module is written in typescript and ships with a type definition by default.
 
 # Installation
 
