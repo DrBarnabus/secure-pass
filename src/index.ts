@@ -1,7 +1,7 @@
 import sodium from 'sodium-native';
-import { SecurePassOptionsError } from './error';
+import { SecurePassError, SecurePassOptionsError } from './error';
 
-export { SecurePassOptionsError };
+export { SecurePassError, SecurePassOptionsError };
 
 export interface SecurePassOptions {
   /**
@@ -14,6 +14,8 @@ export interface SecurePassOptions {
    */
   opsLimit?: number;
 }
+
+export type HashPasswordCallback = (err: SecurePassError | null, hash?: Buffer) => void;
 
 export class SecurePass {
   /**
@@ -178,6 +180,39 @@ export class SecurePass {
    */
   public getOpsLimit(): number {
     return this.opsLimit;
+  }
+
+  public hashPassword(password: Buffer): Promise<Buffer>;
+  public hashPassword(password: Buffer, callback: HashPasswordCallback): void;
+  public hashPassword(password: Buffer, callback?: HashPasswordCallback): Promise<Buffer> | void {
+    if (callback) {
+      this.hashPasswordAsync(password).then(r => callback(null, r), e => callback(e));
+    } else {
+      return this.hashPasswordAsync(password);
+    }
+  }
+
+  private async hashPasswordAsync(password: Buffer): Promise<Buffer> {
+    return new Promise<Buffer>((resolve, reject) => {
+      if (!(password.length > SecurePass.PasswordBytesMin && password.length < SecurePass.PasswordBytesMax)) {
+        reject(
+          new SecurePassError(
+            `Length of Password Buffer must be between ${SecurePass.PasswordBytesMin} and ${
+              SecurePass.PasswordBytesMax
+            }`
+          )
+        );
+      } else {
+        const hash = Buffer.allocUnsafe(SecurePass.HashBytes);
+        sodium.crypto_pwhash_str_async(hash, password, this.opsLimit, this.memLimit, (err: Error) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(hash);
+          }
+        });
+      }
+    });
   }
 }
 

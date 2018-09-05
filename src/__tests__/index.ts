@@ -1,5 +1,5 @@
 import sodium from 'sodium-native';
-import { SecurePass, SecurePassOptionsError } from '../';
+import { SecurePass, SecurePassError, SecurePassOptionsError } from '../';
 
 describe('SecurePass - Constants', () => {
   test('PasswordBytes* Constants should be defined.', () => {
@@ -111,5 +111,55 @@ describe('SecurePass - Options', () => {
       expect(e).toBeDefined();
       expect(e instanceof SecurePassOptionsError).toBeTruthy();
     }
+  });
+});
+
+describe('SecurePass - Functions', () => {
+  describe('async/promise hashPassword()', () => {
+    test('Should return a string if given a valid password buffer.', async () => {
+      const sp = new SecurePass();
+
+      const password = Buffer.from('SecurePass');
+      const hash = await sp.hashPassword(password);
+
+      expect(hash.length).toEqual(SecurePass.HashBytes);
+      expect(hash.toString().length > 0).toBeTruthy();
+      expect(hash.indexOf('$argon2id')).toEqual(0);
+    });
+
+    test('Should return an error if given a blank password buffer.', async () => {
+      const sp = new SecurePass();
+
+      try {
+        const password = Buffer.from('');
+        const hash = await sp.hashPassword(password);
+      } catch (e) {
+        expect(e).toBeDefined();
+        expect(e instanceof SecurePassError).toBeTruthy();
+      }
+    });
+  });
+
+  describe('callback hashPassword()', () => {
+    test('Should return a string if given a valid password buffer.', () => {
+      const sp = new SecurePass();
+
+      const password = Buffer.from('SecurePass');
+      sp.hashPassword(password, (err: SecurePassError | null, hash?: Buffer) => {
+        expect(err).toBeNull();
+        expect(hash).toBeDefined();
+      });
+    });
+
+    test('Should return an error if given a blank password buffer.', () => {
+      const sp = new SecurePass();
+
+      const password = Buffer.from('');
+      sp.hashPassword(password, (err: SecurePassError | null, hash?: Buffer) => {
+        expect(err).toBeDefined();
+        expect(err instanceof SecurePassError).toBeTruthy();
+        expect(hash).toBeUndefined();
+      });
+    });
   });
 });
