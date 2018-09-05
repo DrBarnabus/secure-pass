@@ -1,3 +1,10 @@
+[![NPM Version][npm-badge]][npm-url]
+[![NPM Downloads][npmd-badge]][npm-url]
+[![Build Status][travis-badge]][travis-url]
+[![Test Coverage][codecov-badge]][codecov-url]
+[![Dependencies][dependencies-badge]][dependencies-url]
+[![devDependencies][devDependencies-badge]][devDependencies-url]
+[![Known Vulnerabilities][snyk-badge]][snyk-url]
 # secure-pass - Introduction
 
 SecurePass is a module for the creation of hashes from passwords, allowing you to store passwords securely. The module also provides a facility for the generation and verification of one time use password reset tokens for use in your own password reset flows. This module is a wrapper for [libsodium]'s implementation of the [Argon2ID] password hashing algorithm.
@@ -50,3 +57,16 @@ Copyright (C) 2018 DrBarnabus
 [sodium-native]: https://github.com/sodium-friends/sodium-native
 
 <!-- Badges -->
+[npm-badge]: https://img.shields.io/npm/v/secure-pass.svg?style=flat-square
+[npm-url]: https://www.npmjs.com/package/secure-pass
+[npmd-badge]: https://img.shields.io/npm/dw/secure-pass.svg?style=flat-square
+[travis-badge]: https://img.shields.io/travis/DrBarnabus/secure-pass/master.svg?style=flat-square
+[travis-url]: https://travis-ci.org/DrBarnabus/secure-pass
+[dependencies-badge]: https://david-dm.org/drbarnabus/secure-pass.svg?style=flat-square
+[codecov-badge]: https://img.shields.io/codecov/c/github/DrBarnabus/secure-pass/master.svg?style=flat-square
+[codecov-url]: https://codecov.io/gh/DrBarnabus/secure-pass
+[dependencies-url]: https://david-dm.org/drbarnabus/secure-pass
+[devDependencies-badge]: https://david-dm.org/drbarnabus/secure-pass/dev-status.svg?style=flat-square
+[devDependencies-url]: https://david-dm.org/drbarnabus/secure-pass?type=dev
+[snyk-badge]: https://snyk.io/test/github/DrBarnabus/secure-pass/badge.svg?targetFile=package.json&style=flat-square
+[snyk-url]: https://snyk.io/test/github/DrBarnabus/secure-pass?targetFile=package.json
