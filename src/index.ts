@@ -230,16 +230,16 @@ export class SecurePass {
             }`
           )
         );
-      } else {
-        const hash = Buffer.allocUnsafe(SecurePass.HashBytes);
-        sodium.crypto_pwhash_str_async(hash, password, this.opsLimit, this.memLimit, (err: Error) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(hash);
-          }
-        });
       }
+
+      const hash = Buffer.allocUnsafe(SecurePass.HashBytes);
+      sodium.crypto_pwhash_str_async(hash, password, this.opsLimit, this.memLimit, (err: Error) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(hash);
+        }
+      });
     });
   }
 
