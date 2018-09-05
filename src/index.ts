@@ -272,7 +272,7 @@ export class SecurePass {
           resolve(VerificationResult.Invalid);
         }
 
-        if (sodium.crypto.pwhash_str_needs_rehash(hash, this.opsLimit, this.memLimit)) {
+        if (sodium.crypto_pwhash_str_needs_rehash(hash, this.opsLimit, this.memLimit)) {
           resolve(VerificationResult.ValidNeedsRehash);
         }
 
