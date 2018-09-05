@@ -17,12 +17,18 @@ describe('SecurePass - Constants', () => {
 
   test('MemLimit* Constants should be defined.', () => {
     expect(SecurePass.MemLimitDefault).toBeDefined();
+    expect(SecurePass.MemLimitInteractive).toBeDefined();
+    expect(SecurePass.MemLimitModerate).toBeDefined();
+    expect(SecurePass.MemLimitSensitive).toBeDefined();
     expect(SecurePass.MemLimitMinimum).toBeDefined();
     expect(SecurePass.MemLimitMaximum).toBeDefined();
   });
 
   test('OpsLimit* Constants should be defined.', () => {
     expect(SecurePass.OpsLimitDefault).toBeDefined();
+    expect(SecurePass.OpsLimitInteractive).toBeDefined();
+    expect(SecurePass.OpsLimitModerate).toBeDefined();
+    expect(SecurePass.OpsLimitSensitive).toBeDefined();
     expect(SecurePass.OpsLimitMinimum).toBeDefined();
     expect(SecurePass.OpsLimitMaximum).toBeDefined();
   });

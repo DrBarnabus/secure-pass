@@ -44,6 +44,23 @@ export class SecurePass {
   public static readonly MemLimitDefault: number = sodium.crypto_pwhash_MEMLIMIT_INTERACTIVE;
 
   /**
+   * Interactive Memory Limit. 64MB. For a use case, please see the SecurePass documentation.
+   * @readonly
+   */
+  public static readonly MemLimitInteractive: number = sodium.crypto_pwhash_MEMLIMIT_INTERACTIVE;
+
+  /**
+   * Moderate Memory Limit. 256MB. For a use case, please see the SecurePass documentation.
+   * @readonly
+   */
+  public static readonly MemLimitModerate: number = sodium.crypto_pwhash_MEMLIMIT_MODERATE;
+
+  /**
+   * Sensitive Memory Limit. 1GB. For a use case, please see the SecurePass documentation.
+   */
+  public static readonly MemLimitSensitive: number = sodium.crypto_pwhash_MEMLIMIT_SENSITIVE;
+
+  /**
    * Minimum Memory Limit. 8KB.
    * @readonly
    */
@@ -56,19 +73,36 @@ export class SecurePass {
   public static readonly MemLimitMaximum: number = sodium.crypto_pwhash_MEMLIMIT_MAX;
 
   /**
-   * Default Operations Limit. 2
+   * Default Operations Limit. 2 Operations.
    * @readonly
    */
   public static readonly OpsLimitDefault: number = sodium.crypto_pwhash_OPSLIMIT_INTERACTIVE;
 
   /**
-   * Minimum Operations Limit. 1
+   * Interactive Operations Limit. 2 Operations. For a use case, please see the SecurePass documentation.
+   * @readonly
+   */
+  public static readonly OpsLimitInteractive: number = sodium.crypto_pwhash_OPSLIMIT_INTERACTIVE;
+
+  /**
+   * Moderate Operations Limit. 3 Operations. For a use case, please see the SecurePass documentation.
+   * @readonly
+   */
+  public static readonly OpsLimitModerate: number = sodium.crypto_pwhash_OPSLIMIT_MODERATE;
+
+  /**
+   * Sensitive Operations Limit. 4 Operations. For a use case, please see the SecurePass documentation.
+   */
+  public static readonly OpsLimitSensitive: number = sodium.crypto_pwhash_OPSLIMIT_SENSITIVE;
+
+  /**
+   * Minimum Operations Limit. 1 Operation.
    * @readonly
    */
   public static readonly OpsLimitMinimum: number = sodium.crypto_pwhash_OPSLIMIT_MIN;
 
   /**
-   * Maximum Operations Limit. 4294967295
+   * Maximum Operations Limit. 4294967295 Operations.
    * @readonly
    */
   public static readonly OpsLimitMaximum: number = sodium.crypto_pwhash_OPSLIMIT_MAX;
