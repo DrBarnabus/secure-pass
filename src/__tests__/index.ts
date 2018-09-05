@@ -1,6 +1,33 @@
 import sodium from 'sodium-native';
 import { SecurePass } from '../';
 
+describe('SecurePass - Constants', () => {
+  test('PasswordBytes* Constants should be defined.', () => {
+    expect(SecurePass.PasswordBytesMax).toBeDefined();
+    expect(SecurePass.PasswordBytesMin).toBeDefined();
+  });
+
+  test('HashBytes Constant should be defined.', () => {
+    expect(SecurePass.HashBytes).toBeDefined();
+  });
+
+  test('SaltBytes Constant should be defined', () => {
+    expect(SecurePass.SaltBytes).toBeDefined();
+  });
+
+  test('MemLimit* Constants should be defined.', () => {
+    expect(SecurePass.MemLimitDefault).toBeDefined();
+    expect(SecurePass.MemLimitMinimum).toBeDefined();
+    expect(SecurePass.MemLimitMaximum).toBeDefined();
+  });
+
+  test('OpsLimit* Constants should be defined.', () => {
+    expect(SecurePass.OpsLimitDefault).toBeDefined();
+    expect(SecurePass.OpsLimitMinimum).toBeDefined();
+    expect(SecurePass.OpsLimitMaximum).toBeDefined();
+  });
+});
+
 describe('SecurePass - Options', () => {
   test('Passing no configuration should create a new instance with the default options.', () => {
     const sp = new SecurePass();
