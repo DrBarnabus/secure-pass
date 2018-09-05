@@ -14,7 +14,12 @@ SecurePass is a module for the creation of hashes from passwords, allowing you t
 
 # Installation
 
-**Coming Soon**
+To install the package you need to use a package manager such as npm or yarn.
+
+```
+yarn add secure-pass
+npm install secure-pass
+```
 
 # Usage
 
@@ -22,7 +27,13 @@ SecurePass is a module for the creation of hashes from passwords, allowing you t
 
 # Testing
 
-**Coming Soon**
+This package is configured with [jest] tests, these tests ensure that the module is working correctly and as specified as well as generating code coverage reports.
+
+```
+yarn test
+or
+npm test
+```
 
 # Acknowledgements
 
