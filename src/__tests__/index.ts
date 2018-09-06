@@ -1,5 +1,6 @@
 import sodium from 'sodium-native';
-import { SecurePass, SecurePassError, SecurePassOptionsError, VerificationResult } from '../';
+import { SecurePass, VerificationResult } from '../';
+import { SecurePassError, SecurePassOptionsError } from '../error';
 
 describe('SecurePass - Constants', () => {
   test('PasswordBytes* Constants should be defined.', () => {
