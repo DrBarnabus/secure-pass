@@ -7,7 +7,7 @@
 [![Dependencies][dependencies-badge]][dependencies-url]
 [![devDependencies][devDependencies-badge]][devDependencies-url]
 [![Known Vulnerabilities][snyk-badge]][snyk-url]
-[![Code Quality]][codacy-badge]][codacy-url]
+[![Code Quality][codacy-badge]][codacy-url]
 # Introduction
 
 SecurePass (argon2-pass) is a module for the creation of hashes from passwords, allowing you to store passwords securely. The module also provides a facility for the generation and verification of one time use password reset tokens for use in your own password reset flows. This module is a wrapper for [libsodium]'s implementation of the [Argon2ID] password hashing algorithm.
