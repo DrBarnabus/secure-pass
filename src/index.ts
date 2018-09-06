@@ -1,6 +1,8 @@
 import sodium from 'sodium-native';
 import { SecurePassError, SecurePassOptionsError } from './error';
 
+export { SecurePassError, SecurePassOptionsError } from './error';
+
 export interface SecurePassOptions {
   /**
    * Configures the memory limit of Argon2ID.
