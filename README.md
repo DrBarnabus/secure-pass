@@ -15,9 +15,9 @@ SecurePass is a module for the creation of hashes from passwords, allowing you t
 - Uses <code>Buffer</code>'s for safer memory management.
 - Allows for generation of one time use password reset tokens to be used in your own password reset flow.
 - Easily configurable work factors, allowing you to increase the security of your hashes over time.
-- Three default difficulty configurations for password hashing, as defined in [libsodium]'s implementation.
+- Three default difficulty configurations for password hashing, as defined in [libsodium]'s implementation. Allowing you to configure your security level based on some recommended predefined values.
 - Simple rehashing of passwords you are already storing. Allowing you to improve the security of your hashes over time.
-- The module is written in typescript and ships with a type definition by default.
+- The module is written in typescript and ships with a type definition file by default.
 
 # Installation
 
@@ -44,7 +44,7 @@ npm test
 
 # Acknowledgements
 
-- Special thanks to the creators of [libsodium] and [sodium-native] both of which are used extensively in this package, and which the creation of this module wouldn't have been possible.
+- Special thanks to the creators of [libsodium] and [sodium-native] both of which are used extensively in this package, and without which the creation of this module wouldn't have been possible.
 
 # Licence
 Licensed under [MIT](./LICENSE).
