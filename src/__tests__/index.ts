@@ -1,5 +1,5 @@
 import sodium from 'sodium-native';
-import { SecurePass, VerificationResult } from '../';
+import { GenerateOneTimeAuthResult, SecurePass, VerificationResult } from '../';
 import { SecurePassError, SecurePassOptionsError } from '../error';
 
 describe('SecurePass - Constants', () => {
@@ -119,6 +119,62 @@ describe('SecurePass - Options', () => {
       expect(e).toBeDefined();
       expect(e instanceof SecurePassOptionsError).toBeTruthy();
     }
+  });
+});
+
+describe('SecurePass - Static Functions', () => {
+  describe('generateOneTimeAuth()', () => {
+    test('Should return a mac, key and the original message.', () => {
+      const message = Buffer.from('ExampleMessage');
+      const result = SecurePass.generateOneTimeAuth(message);
+      expect(result.mac).toBeDefined();
+      expect(result.mac.length).toEqual(sodium.crypto_onetimeauth_BYTES);
+      expect(result.message).toBeDefined();
+      expect(result.message.compare(message)).toEqual(0);
+      expect(result.key).toBeDefined();
+      expect(result.key.length).toEqual(sodium.crypto_onetimeauth_KEYBYTES);
+    });
+  });
+
+  describe('verifyOneTimeAuth()', () => {
+    test('Should return true if the message, mac and key match.', () => {
+      const message = Buffer.from('ExampleMessage');
+      const ota = SecurePass.generateOneTimeAuth(message);
+
+      const result = SecurePass.verifyOneTimeAuth(ota.mac, message, ota.key);
+      expect(result).toBeDefined();
+      expect(result).toBeTruthy();
+    });
+
+    test('Should return false if the message does not match the mac and key.', () => {
+      const message = Buffer.from('ExampleMessage');
+      const ota = SecurePass.generateOneTimeAuth(message);
+
+      const badMessage = Buffer.from('ExampleBad');
+      const result = SecurePass.verifyOneTimeAuth(ota.mac, badMessage, ota.key);
+      expect(result).toBeDefined();
+      expect(result).toBeFalsy();
+    });
+
+    test('Should return false if the mac does not match the message and key.', () => {
+      const message = Buffer.from('ExampleMessage');
+      const ota = SecurePass.generateOneTimeAuth(message);
+
+      const badMac = Buffer.alloc(sodium.crypto_onetimeauth_BYTES);
+      const result = SecurePass.verifyOneTimeAuth(badMac, message, ota.key);
+      expect(result).toBeDefined();
+      expect(result).toBeFalsy();
+    });
+
+    test('Should return false if the key does not match the message and mac.', () => {
+      const message = Buffer.from('ExampleMessage');
+      const ota = SecurePass.generateOneTimeAuth(message);
+
+      const badKey = Buffer.alloc(sodium.crypto_onetimeauth_KEYBYTES);
+      const result = SecurePass.verifyOneTimeAuth(ota.mac, message, badKey);
+      expect(result).toBeDefined();
+      expect(result).toBeFalsy();
+    });
   });
 });
 

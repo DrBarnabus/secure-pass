@@ -26,6 +26,12 @@ export enum VerificationResult {
   ValidNeedsRehash
 }
 
+export interface GenerateOneTimeAuthResult {
+  mac: Buffer;
+  message: Buffer;
+  key: Buffer;
+}
+
 export class SecurePass {
   /**
    * Minimum Length for the Password input buffer.
@@ -120,6 +126,21 @@ export class SecurePass {
    * @readonly
    */
   public static readonly OpsLimitMaximum: number = sodium.crypto_pwhash_OPSLIMIT_MAX;
+
+  public static generateOneTimeAuth(message: Buffer): GenerateOneTimeAuthResult {
+    const mac = Buffer.alloc(sodium.crypto_onetimeauth_BYTES);
+
+    const key = Buffer.alloc(sodium.crypto_onetimeauth_KEYBYTES);
+    sodium.randombytes_buf(key);
+
+    sodium.crypto_onetimeauth(mac, message, key);
+
+    return { mac, message, key };
+  }
+
+  public static verifyOneTimeAuth(mac: Buffer, message: Buffer, key: Buffer): boolean {
+    return sodium.crypto_onetimeauth_verify(mac, message, key);
+  }
 
   /**
    * Configured memory limit for Argon2ID.
