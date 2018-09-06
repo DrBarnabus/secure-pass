@@ -1,6 +1,6 @@
 {
   "name": "argon2-pass",
-  "version": "0.1.3-dev.0",
+  "version": "0.1.3",
   "description": "State of the art password hashing and one time password reset token generation module written in TypeScript for nodejs.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
