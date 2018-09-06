@@ -1,5 +1,5 @@
 {
-  "name": "@drbarnabus/secure-pass",
+  "name": "argon2-pass",
   "version": "0.1.0",
   "description": "State of the art password hashing and one time password reset token generation module written in TypeScript for nodejs.",
   "main": "./dist/index.js",
