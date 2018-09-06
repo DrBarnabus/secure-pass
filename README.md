@@ -1,3 +1,5 @@
+<p align="center"><img width=80% src="https://github.com/DrBarnabus/secure-pass/blob/master/media/logo_transparent_background.png"></p>
+
 [![NPM Version][npm-badge]][npm-url]
 [![NPM Downloads][npmd-badge]][npm-url]
 [![Build Status][travis-badge]][travis-url]
@@ -5,7 +7,7 @@
 [![Dependencies][dependencies-badge]][dependencies-url]
 [![devDependencies][devDependencies-badge]][devDependencies-url]
 [![Known Vulnerabilities][snyk-badge]][snyk-url]
-# secure-pass - Introduction
+# Introduction
 
 SecurePass is a module for the creation of hashes from passwords, allowing you to store passwords securely. The module also provides a facility for the generation and verification of one time use password reset tokens for use in your own password reset flows. This module is a wrapper for [libsodium]'s implementation of the [Argon2ID] password hashing algorithm.
 
