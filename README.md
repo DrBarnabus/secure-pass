@@ -1,4 +1,4 @@
-<p align="center"><img width=60% src="https://github.com/DrBarnabus/secure-pass/blob/master/media/logo_transparent_background.png"></p>
+<p align="center"><img width="60%" src="https://github.com/DrBarnabus/secure-pass/blob/master/media/logo_transparent_background.png"></p>
 
 [![NPM Version][npm-badge]][npm-url]
 [![NPM Downloads][npmd-badge]][npm-url]
@@ -9,7 +9,7 @@
 [![Known Vulnerabilities][snyk-badge]][snyk-url]
 # Introduction
 
-SecurePass is a module for the creation of hashes from passwords, allowing you to store passwords securely. The module also provides a facility for the generation and verification of one time use password reset tokens for use in your own password reset flows. This module is a wrapper for [libsodium]'s implementation of the [Argon2ID] password hashing algorithm.
+SecurePass (argon2-pass) is a module for the creation of hashes from passwords, allowing you to store passwords securely. The module also provides a facility for the generation and verification of one time use password reset tokens for use in your own password reset flows. This module is a wrapper for [libsodium]'s implementation of the [Argon2ID] password hashing algorithm.
 
 # Features
 
@@ -26,8 +26,8 @@ SecurePass is a module for the creation of hashes from passwords, allowing you t
 To install the package you need to use a package manager such as npm or yarn.
 
 ```
-yarn add secure-pass
-npm install secure-pass
+yarn add argon2-pass
+npm install argon2-pass
 ```
 
 # Usage
@@ -59,16 +59,16 @@ Copyright (C) 2018 DrBarnabus
 [sodium-native]: https://github.com/sodium-friends/sodium-native
 
 <!-- Badges -->
-[npm-badge]: https://img.shields.io/npm/v/secure-pass.svg?style=flat-square
-[npm-url]: https://www.npmjs.com/package/secure-pass
-[npmd-badge]: https://img.shields.io/npm/dw/secure-pass.svg?style=flat-square
+[npm-badge]: https://img.shields.io/npm/v/argon2-pass.svg?style=flat-square
+[npm-url]: https://www.npmjs.com/package/argon2-pass
+[npmd-badge]: https://img.shields.io/npm/dw/argon2-pass.svg?style=flat-square
 [travis-badge]: https://img.shields.io/travis/DrBarnabus/secure-pass/master.svg?style=flat-square
 [travis-url]: https://travis-ci.org/DrBarnabus/secure-pass
-[dependencies-badge]: https://david-dm.org/drbarnabus/secure-pass.svg?style=flat-square
+[dependencies-badge]: https://david-dm.org/drbarnabus/argon2-pass.svg?style=flat-square
 [codecov-badge]: https://img.shields.io/codecov/c/github/DrBarnabus/secure-pass/master.svg?style=flat-square
 [codecov-url]: https://codecov.io/gh/DrBarnabus/secure-pass
-[dependencies-url]: https://david-dm.org/drbarnabus/secure-pass
-[devDependencies-badge]: https://david-dm.org/drbarnabus/secure-pass/dev-status.svg?style=flat-square
-[devDependencies-url]: https://david-dm.org/drbarnabus/secure-pass?type=dev
+[dependencies-url]: https://david-dm.org/drbarnabus/argon2-pass
+[devDependencies-badge]: https://david-dm.org/drbarnabus/argon2-pass/dev-status.svg?style=flat-square
+[devDependencies-url]: https://david-dm.org/drbarnabus/argon2-pass?type=dev
 [snyk-badge]: https://snyk.io/test/github/DrBarnabus/secure-pass/badge.svg?targetFile=package.json&style=flat-square
 [snyk-url]: https://snyk.io/test/github/DrBarnabus/secure-pass?targetFile=package.json
