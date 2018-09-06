@@ -1,4 +1,4 @@
-<p align="center"><img width=80% src="https://github.com/DrBarnabus/secure-pass/blob/master/media/logo_transparent_background.png"></p>
+<p align="center"><img width=60% src="https://github.com/DrBarnabus/secure-pass/blob/master/media/logo_transparent_background.png"></p>
 
 [![NPM Version][npm-badge]][npm-url]
 [![NPM Downloads][npmd-badge]][npm-url]
