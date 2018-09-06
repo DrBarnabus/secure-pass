@@ -176,6 +176,37 @@ describe('SecurePass - Static Functions', () => {
       expect(result).toBeFalsy();
     });
   });
+
+  describe('generateOneTimeAuthCode()', () => {
+    test('Should return a code string and a key buffer.', () => {
+      const message = Buffer.from('ExampleMessage');
+      const result = SecurePass.generateOneTimeAuthCode(message);
+      expect(typeof result.code).toEqual('string');
+      expect(result.code.length > 0).toBeTruthy();
+      expect(result.code.indexOf('~')).toBeTruthy();
+      expect(result.key instanceof Buffer).toBeTruthy();
+      expect(result.key.length).toEqual(sodium.crypto_onetimeauth_KEYBYTES);
+    });
+  });
+
+  describe('verifyOneTimeAuthCode()', () => {
+    test('Should return true when used with a valid code and key.', () => {
+      const message = Buffer.from('ExampleMessage');
+      const ota = SecurePass.generateOneTimeAuthCode(message);
+
+      const result = SecurePass.verifyOneTimeAuthCode(ota.code, ota.key);
+      expect(result).toBeTruthy();
+    });
+
+    test('Should return false when used with an invalid key.', () => {
+      const message = Buffer.from('ExampleMessage');
+      const ota = SecurePass.generateOneTimeAuthCode(message);
+
+      const badKey = Buffer.alloc(sodium.crypto_onetimeauth_KEYBYTES);
+      const result = SecurePass.verifyOneTimeAuthCode(ota.code, badKey);
+      expect(result).toBeFalsy();
+    });
+  });
 });
 
 describe('SecurePass - Functions', () => {

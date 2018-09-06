@@ -32,6 +32,11 @@ export interface GenerateOneTimeAuthResult {
   key: Buffer;
 }
 
+export interface GenerateOneTimeAuthCodeResult {
+  code: string;
+  key: Buffer;
+}
+
 export class SecurePass {
   /**
    * Minimum Length for the Password input buffer.
@@ -139,6 +144,20 @@ export class SecurePass {
   }
 
   public static verifyOneTimeAuth(mac: Buffer, message: Buffer, key: Buffer): boolean {
+    return sodium.crypto_onetimeauth_verify(mac, message, key);
+  }
+
+  public static generateOneTimeAuthCode(message: Buffer): GenerateOneTimeAuthCodeResult {
+    const ota = SecurePass.generateOneTimeAuth(message);
+
+    return { code: bufferToSafeBase64(ota.message) + '~' + bufferToSafeBase64(ota.mac), key: ota.key };
+  }
+
+  public static verifyOneTimeAuthCode(code: string, key: Buffer): boolean {
+    const message = bufferFromSafeBase64(code.substr(0, code.indexOf('~')));
+
+    const mac = bufferFromSafeBase64(code.substr(code.indexOf('~') + 1, code.length));
+
     return sodium.crypto_onetimeauth_verify(mac, message, key);
   }
 

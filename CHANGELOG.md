@@ -5,6 +5,8 @@ All notable changes to this project will be documented in this file. This projec
 ### Added
 
 - Added internal functions to convert buffers to url-safe base64 and back again.
+- Added functions to generate and verify one time authentication buffers. Generates a mac from a supplied message using a random key.
+- Added convenience function to generate and verify one time authentication codes, the mac and message is returned as base64 string.
 
 ### Changed
 
