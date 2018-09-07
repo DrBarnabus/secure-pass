@@ -10,6 +10,8 @@
 [![Code Quality][codacy-badge]][codacy-url]
 # Introduction
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/7ec0ca32fe744612bc5fefd8ce7134f0)](https://app.codacy.com/app/DrBarnabus/secure-pass?utm_source=github.com&utm_medium=referral&utm_content=DrBarnabus/secure-pass&utm_campaign=Badge_Grade_Settings)
+
 SecurePass (argon2-pass) is a module for the creation of hashes from passwords, allowing you to store passwords securely. The module also provides a facility for the generation and verification of one time use password reset tokens for use in your own password reset flows. This module is a wrapper for [libsodium]'s implementation of the [Argon2ID] password hashing algorithm.
 
 # Features
