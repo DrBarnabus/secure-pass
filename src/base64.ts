@@ -1,4 +1,8 @@
 /**
+ * @module SecurePass
+ */
+
+/**
  * Converts a buffer into url-safe base64.
  * @param buf - The Buffer to convert.
  */

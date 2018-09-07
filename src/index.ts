@@ -1,8 +1,13 @@
+/**
+ * @module SecurePass
+ */
+
 import sodium from 'sodium-native';
 import { bufferFromSafeBase64, bufferToSafeBase64 } from './base64';
 import { SecurePassError, SecurePassOptionsError } from './error';
 
 export { SecurePassError, SecurePassOptionsError } from './error';
+export { bufferFromSafeBase64, bufferToSafeBase64 } from './base64';
 
 export interface SecurePassOptions {
   /**

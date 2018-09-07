@@ -1,4 +1,4 @@
-import { bufferFromSafeBase64, bufferToSafeBase64 } from '../base64';
+import { bufferFromSafeBase64, bufferToSafeBase64 } from '..';
 
 describe('base64', () => {
   describe('bufferFromSafeBase64', () => {

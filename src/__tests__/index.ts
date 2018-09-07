@@ -1,5 +1,5 @@
 import sodium from 'sodium-native';
-import { GenerateOneTimeAuthResult, SecurePass, VerificationResult } from '../';
+import { GenerateOneTimeAuthResult, SecurePass, VerificationResult } from '..';
 import { SecurePassError, SecurePassOptionsError } from '../error';
 
 describe('SecurePass - Constants', () => {
