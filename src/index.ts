@@ -9,36 +9,53 @@ import { SecurePassError, SecurePassOptionsError } from './error';
 export { SecurePassError, SecurePassOptionsError } from './error';
 export { bufferFromSafeBase64, bufferToSafeBase64 } from './base64';
 
+/** A set of configuration options used to configure a new instance of SecurePass */
 export interface SecurePassOptions {
   /**
-   * Configures the memory limit of Argon2ID.
+   * Configures the memory limit of Argon2ID. This value is in bytes.
+   * The default value is 64MB.
    */
   memLimit?: number;
 
   /**
    * Configures the operation limit of Argon2ID.
+   * The default value is 2.
    */
   opsLimit?: number;
 }
 
+/** The callback function signature when hashPassword is used with a callback. */
 export type HashPasswordCallback = (err: SecurePassError | null, hash?: Buffer) => void;
+
+/** The callback function signature when verifyHash is used with a callback. */
 export type VerifyHashCallback = (err: SecurePassError | null, result?: VerificationResult) => void;
 
 export enum VerificationResult {
+  /** Returned if the hash is in an invalid format or wasn't created by SecurePass. */
   InvalidOrUnrecognized,
+  /** Returned if the hash doesn't match the supplied plaintext password. */
   Invalid,
+  /** Returned if the hash is valid and matches the supplied plaintext password. */
   Valid,
+  /** Returned if the hash is valid, but could be improved with the currently set difficulty options. */
   ValidNeedsRehash
 }
 
+/** Used to return a One Time Authentication mac and key as well as the message it was derrived from. */
 export interface GenerateOneTimeAuthResult {
+  /** One Time Authentication mac. */
   mac: Buffer;
+  /** One Time Authentication message. */
   message: Buffer;
+  /** One Time Authentication randomly generated key. This value should be kept secret. */
   key: Buffer;
 }
 
+/** Used to return a One Time Authentication Code and randomly generated key. */
 export interface GenerateOneTimeAuthCodeResult {
+  /** One Time Authentication mac and message stored as a specifically formatted base64 string. */
   code: string;
+  /** One Time Authentication randomly generated key. This value should be kept secret. */
   key: Buffer;
 }
 
@@ -74,30 +91,39 @@ export class SecurePass {
   public static readonly MemLimitDefault: number = sodium.crypto_pwhash_MEMLIMIT_INTERACTIVE;
 
   /**
-   * Interactive Memory Limit. 64MB. For a use case, please see the SecurePass documentation.
+   * Interactive Memory Limit. 64MB. This value is the same as MemLimitDefault.
+   * This memory limit is recommended for interactive "online" applications, when combined with OpsLimitInteractive,
+   * this option requires 64 MiB of dedicated RAM and provides a baseline configuration for web app security.
+   * Choosing a higher value such as MemLimitModerate, MemLimitSensitive or a custom value may improve security.
    * @readonly
    */
   public static readonly MemLimitInteractive: number = sodium.crypto_pwhash_MEMLIMIT_INTERACTIVE;
 
   /**
-   * Moderate Memory Limit. 256MB. For a use case, please see the SecurePass documentation.
+   * Moderate Memory Limit. 256MB.
+   * This memory limit, combined with OpsLimitModerate provides a good performance and security baseline for
+   * applications that require higher security than the default/interactive preset.
+   * Use of this option requires a minimum of 256 MiB of dedicated RAM.
    * @readonly
    */
   public static readonly MemLimitModerate: number = sodium.crypto_pwhash_MEMLIMIT_MODERATE;
 
   /**
-   * Sensitive Memory Limit. 1GB. For a use case, please see the SecurePass documentation.
+   * Sensitive Memory Limit. 1GB.
+   * This memory limit, combined with OpsLimitSensitive, is recommended for highly sensitive data
+   * and non-interactive operations.
+   * Use of this option requires a minimum of 1024 MiB of dedicated RAM.
    */
   public static readonly MemLimitSensitive: number = sodium.crypto_pwhash_MEMLIMIT_SENSITIVE;
 
   /**
-   * Minimum Memory Limit. 8KB.
+   * The Minimum Allowed Memory Limit. 8KB.
    * @readonly
    */
   public static readonly MemLimitMinimum: number = sodium.crypto_pwhash_MEMLIMIT_MIN;
 
   /**
-   * Maximum Memory Limit. 4TB.
+   * The Maximum Allowed Memory Limit. 4TB.
    * @readonly
    */
   public static readonly MemLimitMaximum: number = sodium.crypto_pwhash_MEMLIMIT_MAX;
@@ -109,30 +135,39 @@ export class SecurePass {
   public static readonly OpsLimitDefault: number = sodium.crypto_pwhash_OPSLIMIT_INTERACTIVE;
 
   /**
-   * Interactive Operations Limit. 2 Operations. For a use case, please see the SecurePass documentation.
+   * Interactive Operations Limit. 2 Operations.This value is the same as OpsLimitDefault.
+   * This operations limit is recommended for interactive "online" applications, when combined with MemLimitInteractive,
+   * this option provides a baseline configuration for web app security.
+   * Choosing a higher value such as MemLimitModerate, MemLimitSensitive or a custom value may improve security.
    * @readonly
    */
   public static readonly OpsLimitInteractive: number = sodium.crypto_pwhash_OPSLIMIT_INTERACTIVE;
 
   /**
-   * Moderate Operations Limit. 3 Operations. For a use case, please see the SecurePass documentation.
+   * Moderate Operations Limit. 3 Operations.
+   * This operations limit, combined with MemLimitModerate provides a good performance and security baseline for
+   * applications that require higher security than the default/interactive preset.
+   * Using this options takes around 0.7 seconds to derrive a hash on a 2.8Ghz Core i7 CPU.
    * @readonly
    */
   public static readonly OpsLimitModerate: number = sodium.crypto_pwhash_OPSLIMIT_MODERATE;
 
   /**
-   * Sensitive Operations Limit. 4 Operations. For a use case, please see the SecurePass documentation.
+   * Sensitive Operations Limit. 4 Operations.
+   * This memory limit, combined with OpsLimitSensitive, is recommended for highly sensitive data
+   * and non-interactive operations.
+   * Using this option it takes around 3.5 seconds to derrive a hash on a 2.8Ghz Core i7 CPU.
    */
   public static readonly OpsLimitSensitive: number = sodium.crypto_pwhash_OPSLIMIT_SENSITIVE;
 
   /**
-   * Minimum Operations Limit. 1 Operation.
+   * The Minimum Allowed Operations Limit. 1 Operation.
    * @readonly
    */
   public static readonly OpsLimitMinimum: number = sodium.crypto_pwhash_OPSLIMIT_MIN;
 
   /**
-   * Maximum Operations Limit. 4294967295 Operations.
+   * The Maximum Allowed Operations Limit. 4294967295 Operations.
    * @readonly
    */
   public static readonly OpsLimitMaximum: number = sodium.crypto_pwhash_OPSLIMIT_MAX;

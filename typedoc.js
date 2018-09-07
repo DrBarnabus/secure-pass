@@ -5,5 +5,6 @@ module.exports = {
   mode: 'file',
   excludeExternals: true,
   excludeNotExported: true,
-  excludePrivate: true
+  excludePrivate: true,
+  name: 'SecurePass (argon2-pass)'
 }
