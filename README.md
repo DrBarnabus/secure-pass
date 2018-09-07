@@ -1,4 +1,4 @@
-<p align="center"><img width="60%" src="https://raw.github.com/DrBarnabus/secure-pass/master/media/logo_transparent_background.png"></p>
+<p align="center"><a href="https://drbarnabus.github.io/secure-pass/"><img width="60%" src="https://raw.github.com/DrBarnabus/secure-pass/master/media/logo_transparent_background.png"></a></p>
 
 [![NPM Version][npm-badge]][npm-url]
 [![NPM Downloads][npmd-badge]][npm-url]
@@ -16,6 +16,8 @@ SecurePass (argon2-pass) is a module for the creation of hashes from passwords, 
 
 - Uses the state of the art, secure modern password hashing algorithm [Argon2ID].
 - Uses Buffer's for safer memory management.
+- Uses static functions for basic operations, so you don't have to create a new instance every time.
+- asynchronous functions are defined to work with async/await, promises and callbacks. Synchronous versions are also available just in-case you don't want your hashing and verification to be  asynchronous.
 - Allows for generation of one time use authentication tokens to be used in your own password reset flow.
 - Easily configurable work factors, allowing you to increase the security of your hashes over time.
 - Three default difficulty configurations for password hashing, as defined in [libsodium]'s implementation. Allowing you to configure your security level based on some recommended predefined values.
@@ -38,7 +40,37 @@ npm install argon2-pass
 
 # Usage
 
-**Coming Soon**
+Basic Usage Information:
+
+```typescript
+import { SecurePass, VerificationResult } from 'argon2-pass';
+
+async function main() {
+  // Create a new instance of SecurePass. Optional difficulty configurations can be passed in here.
+  const sp = new SecurePass();
+  
+  // Passwords and Hashes are stored as buffers internally.
+  const password = Buffer.from('SamplePassword');
+  const hash = await sp.hashPassword(password);
+
+  // Hash Verification returns an enumerator for easy validation of passwords against hashes.
+  const result = await sp.verifyHash(password, hash);
+  if (result == VerificationResult.InvalidOrUnrecognised) { 
+    console.log('Hash not created by SecurePass or invalid');
+  } else if (result == VerificationResult.Invalid) {
+    console.log('Password not valid when compared with supplied hash');
+  } else if (result == VerificationResult.Valid) {
+    console.log('Password and Hash are a match');
+  } else if (result == VerificationResult.ValidNeedsRehash) {
+    console.log('Password and Hash are a match, but the security of the hash could be improved by rehashing.');
+  }
+}
+
+// Call the async function defined above to run the example.
+main();
+```
+
+For full documentation, please refer to the full [documentation site](https://drbarnabus.github.io/secure-pass/). The documentation was generated automaticaly with [TypeDoc].
 
 # Testing
 
@@ -77,6 +109,7 @@ Copyright (C) 2018 DrBarnabus
 [david-dm]: https://david-dm.org/drbarnabus/secure-pass
 [snyk]: https://snyk.io/test/github/DrBarnabus/secure-pass?targetFile=package.json
 [codacy]: https://www.codacy.com/app/DrBarnabus/secure-pass?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=DrBarnabus/secure-pass&amp;utm_campaign=Badge_Grade
+[TypeDoc]: https://github.com/TypeStrong/typedoc
 
 <!-- Badges -->
 [npm-badge]: https://img.shields.io/npm/v/argon2-pass.svg

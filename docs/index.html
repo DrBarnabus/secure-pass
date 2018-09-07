@@ -60,7 +60,7 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<p align="center"><img width="60%" src="https://raw.github.com/DrBarnabus/secure-pass/master/media/logo_transparent_background.png"></p>
+				<p align="center"><a href="https://drbarnabus.github.io/secure-pass/"><img width="60%" src="https://raw.github.com/DrBarnabus/secure-pass/master/media/logo_transparent_background.png"></a></p>
 				<p><a href="https://www.npmjs.com/package/argon2-pass"><img src="https://img.shields.io/npm/v/argon2-pass.svg" alt="NPM Version"></a>
 					<a href="https://www.npmjs.com/package/argon2-pass"><img src="https://img.shields.io/npm/dw/argon2-pass.svg" alt="NPM Downloads"></a>
 					<a href="https://travis-ci.org/DrBarnabus/secure-pass"><img src="https://travis-ci.org/DrBarnabus/secure-pass.svg?branch=master" alt="Build Status"></a>
@@ -75,6 +75,8 @@
 				<ul>
 					<li>Uses the state of the art, secure modern password hashing algorithm <a href="https://en.wikipedia.org/wiki/Argon2">Argon2ID</a>.</li>
 					<li>Uses Buffer&#39;s for safer memory management.</li>
+					<li>Uses static functions for basic operations, so you don&#39;t have to create a new instance every time.</li>
+					<li>asynchronous functions are defined to work with async/await, promises and callbacks. Synchronous versions are also available just in-case you don&#39;t want your hashing and verification to be  asynchronous.</li>
 					<li>Allows for generation of one time use authentication tokens to be used in your own password reset flow.</li>
 					<li>Easily configurable work factors, allowing you to increase the security of your hashes over time.</li>
 					<li>Three default difficulty configurations for password hashing, as defined in <a href="https://download.libsodium.org/doc/">libsodium</a>&#39;s implementation. Allowing you to configure your security level based on some recommended predefined values.</li>
@@ -87,7 +89,33 @@
 				<p>Or via <a href="https://www.npmjs.com/package/argon2-pass"><code>npm</code></a>:</p>
 				<pre><code class="language-bash">npm install argon2-pass</code></pre>
 				<h1 id="usage">Usage</h1>
-				<p><strong>Coming Soon</strong></p>
+				<p>Basic Usage Information:</p>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { SecurePass, VerificationResult } <span class="hljs-keyword">from</span> <span class="hljs-string">'argon2-pass'</span>;
+
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-comment">// Create a new instance of SecurePass. Optional difficulty configurations can be passed in here.</span>
+  <span class="hljs-keyword">const</span> sp = <span class="hljs-keyword">new</span> SecurePass();
+
+  <span class="hljs-comment">// Passwords and Hashes are stored as buffers internally.</span>
+  <span class="hljs-keyword">const</span> password = Buffer.from(<span class="hljs-string">'SamplePassword'</span>);
+  <span class="hljs-keyword">const</span> hash = <span class="hljs-keyword">await</span> sp.hashPassword(password);
+
+  <span class="hljs-comment">// Hash Verification returns an enumerator for easy validation of passwords against hashes.</span>
+  <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> sp.verifyHash(password, hash);
+  <span class="hljs-keyword">if</span> (result == VerificationResult.InvalidOrUnrecognised) { 
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Hash not created by SecurePass or invalid'</span>);
+  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (result == VerificationResult.Invalid) {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Password not valid when compared with supplied hash'</span>);
+  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (result == VerificationResult.Valid) {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Password and Hash are a match'</span>);
+  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (result == VerificationResult.ValidNeedsRehash) {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Password and Hash are a match, but the security of the hash could be improved by rehashing.'</span>);
+  }
+}
+
+<span class="hljs-comment">// Call the async function defined above to run the example.</span>
+main();</code></pre>
+				<p>For full documentation, please refer to the full <a href="https://drbarnabus.github.io/secure-pass/">documentation site</a>. The documentation was generated automaticaly with <a href="https://github.com/TypeStrong/typedoc">TypeDoc</a>.</p>
 				<h1 id="testing">Testing</h1>
 				<p>This package is configured with <a href="https://github.com/facebook/jest">jest</a> tests, these tests ensure that the module is working correctly and as specified as well as generating code coverage reports to ensure every line of code is covered by a unit test.</p>
 				<p>To run the jest tests manualy run the test script defined in package.json:</p>
