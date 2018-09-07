@@ -10,13 +10,13 @@
 [![Code Quality][codacy-badge]][codacy-url]
 # Introduction
 
-SecurePass (argon2-pass) is a module for the creation of hashes from passwords, allowing you to store passwords securely. The module also provides a facility for the generation and verification of one time use password reset tokens for use in your own password reset flows. This module is a wrapper for [libsodium]'s implementation of the [Argon2ID] password hashing algorithm.
+SecurePass (argon2-pass) is a module for the creation of hashes from passwords, allowing you to store passwords securely. The module also provides a facility for the generation and verification of one time authentication tokens for use in your own password reset flows. This module is a wrapper for [libsodium]'s implementation of the [Argon2ID] password hashing algorithm and Poly1305.
 
 # Features
 
 - Uses the state of the art, secure modern password hashing algorithm [Argon2ID].
-- Uses <code>Buffer</code>'s for safer memory management.
-- Allows for generation of one time use password reset tokens to be used in your own password reset flow.
+- Uses Buffer's for safer memory management.
+- Allows for generation of one time use authentication tokens to be used in your own password reset flow.
 - Easily configurable work factors, allowing you to increase the security of your hashes over time.
 - Three default difficulty configurations for password hashing, as defined in [libsodium]'s implementation. Allowing you to configure your security level based on some recommended predefined values.
 - Simple rehashing of passwords you are already storing. Allowing you to improve the security of your hashes over time.
@@ -24,10 +24,15 @@ SecurePass (argon2-pass) is a module for the creation of hashes from passwords, 
 
 # Installation
 
-To install the package you need to use a package manager such as npm or yarn.
+Install argon2-pass using [`yarn`](https://yarnpkg.com/en/package/argon2-pass):
 
-```
+```bash
 yarn add argon2-pass
+```
+
+Or via [`npm`](https://www.npmjs.com/package/argon2-pass):
+
+```bash
 npm install argon2-pass
 ```
 
@@ -37,13 +42,21 @@ npm install argon2-pass
 
 # Testing
 
-This package is configured with [jest] tests, these tests ensure that the module is working correctly and as specified as well as generating code coverage reports.
+This package is configured with [jest] tests, these tests ensure that the module is working correctly and as specified as well as generating code coverage reports to ensure every line of code is covered by a unit test.
 
-```
+To run the jest tests manualy run the test script defined in package.json:
+
+```bash
 yarn test
-or
-npm test
 ```
+
+This module also has the following automated testing:
+
+- CI Builds on [Travis].
+- Code Coverage Reports on [CodeCov].
+- Dependency Update Checks on [david-dm].
+- Dependency Vulnerabilities Checks on [snyk].
+- Automated Code Review and Quality Report on [codacy].
 
 # Acknowledgements
 
@@ -58,20 +71,26 @@ Copyright (C) 2018 DrBarnabus
 [libsodium]: https://download.libsodium.org/doc/
 [Argon2ID]: https://en.wikipedia.org/wiki/Argon2
 [sodium-native]: https://github.com/sodium-friends/sodium-native
+[jest]: https://github.com/facebook/jest
+[Travis]: https://travis-ci.org/DrBarnabus/secure-pass
+[CodeCov]: https://codecov.io/gh/DrBarnabus/secure-pass
+[david-dm]: https://david-dm.org/drbarnabus/secure-pass
+[snyk]: https://snyk.io/test/github/DrBarnabus/secure-pass?targetFile=package.json
+[codacy]: https://www.codacy.com/app/DrBarnabus/secure-pass?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=DrBarnabus/secure-pass&amp;utm_campaign=Badge_Grade
 
 <!-- Badges -->
-[npm-badge]: https://img.shields.io/npm/v/argon2-pass.svg?style=flat-square
+[npm-badge]: https://img.shields.io/npm/v/argon2-pass.svg
 [npm-url]: https://www.npmjs.com/package/argon2-pass
-[npmd-badge]: https://img.shields.io/npm/dw/argon2-pass.svg?style=flat-square
-[travis-badge]: https://img.shields.io/travis/DrBarnabus/secure-pass/master.svg?style=flat-square
+[npmd-badge]: https://img.shields.io/npm/dw/argon2-pass.svg
+[travis-badge]: https://travis-ci.org/DrBarnabus/secure-pass.svg?branch=master
 [travis-url]: https://travis-ci.org/DrBarnabus/secure-pass
-[codecov-badge]: https://img.shields.io/codecov/c/github/DrBarnabus/secure-pass/master.svg?style=flat-square
+[codecov-badge]: https://codecov.io/gh/DrBarnabus/secure-pass/branch/master/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/DrBarnabus/secure-pass
-[dependencies-badge]: https://david-dm.org/drbarnabus/secure-pass.svg?style=flat-square
+[dependencies-badge]: https://david-dm.org/drbarnabus/secure-pass.svg
 [dependencies-url]: https://david-dm.org/drbarnabus/secure-pass
-[devDependencies-badge]: https://david-dm.org/drbarnabus/secure-pass/dev-status.svg?style=flat-square
+[devDependencies-badge]: https://david-dm.org/drbarnabus/secure-pass/dev-status.svg
 [devDependencies-url]: https://david-dm.org/drbarnabus/secure-pass?type=dev
-[snyk-badge]: https://snyk.io/test/github/DrBarnabus/secure-pass/badge.svg?targetFile=package.json&style=flat-square
+[snyk-badge]: https://snyk.io/test/github/DrBarnabus/secure-pass/badge.svg?targetFile=package.json
 [snyk-url]: https://snyk.io/test/github/DrBarnabus/secure-pass?targetFile=package.json
-[codacy-badge]: https://img.shields.io/codacy/grade/e27821fb6289410b8f58338c7e0bc686/master.svg?style=flat-square
+[codacy-badge]: https://api.codacy.com/project/badge/Grade/86e94a6a25c44d7bb7e514e7e2747e24
 [codacy-url]: https://www.codacy.com/app/DrBarnabus/secure-pass?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=DrBarnabus/secure-pass&amp;utm_campaign=Badge_Grade
