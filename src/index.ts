@@ -294,8 +294,8 @@ export class SecurePass {
   }
 
   /**
-   * Takes the provided password buffer and returns a Argon2ID hash.
-   * @param password - The password buffer to be hashed.
+   * Takes the provided password and returns the derived Argon2ID hash.
+   * @param password - The password to be hashed.
    * @param callback - Optional callback function.
    */
   public hashPassword(password: Buffer): Promise<Buffer>;
@@ -309,9 +309,27 @@ export class SecurePass {
   }
 
   /**
-   * Takes the provided password buffer and the hash buffer and returns the result of the verification.
-   * @param password - The password buffer to be verified.
-   * @param hash - The has buffer to be verified agains.
+   * Takes the provided password and returns the derived Argon2ID hash.
+   * @param password - The password to be hashed.
+   */
+  public hashPasswordSync(password: Buffer): Buffer {
+    if (!(password.length > SecurePass.PasswordBytesMin && password.length < SecurePass.PasswordBytesMax)) {
+      throw new SecurePassError(
+        `Length of Password Buffer must be between ${SecurePass.PasswordBytesMin} and ${SecurePass.PasswordBytesMax}`
+      );
+    }
+
+    const hash = Buffer.allocUnsafe(SecurePass.HashBytes);
+    sodium.crypto_pwhash_str(hash, password, this.opsLimit, this.memLimit);
+
+    return hash;
+  }
+
+  /**
+   * Takes the provided password and the hash buffer
+   * and returns the result of the verification as an enumeration value.
+   * @param password - The password to be verified.
+   * @param hash - The hash to be verified against.
    */
   public verifyHash(password: Buffer, hash: Buffer): Promise<VerificationResult>;
   public verifyHash(password: Buffer, hash: Buffer, callback: VerifyHashCallback): void;
@@ -321,6 +339,38 @@ export class SecurePass {
     } else {
       return this.verifyHashAsync(password, hash);
     }
+  }
+
+  /**
+   * Takes the provided password and the hash buffer
+   * and returns the result of the verification as an enumeration value.
+   * @param password - The password to be verified.
+   * @param hash - The hash to be verified against.
+   */
+  public verifyHashSync(password: Buffer, hash: Buffer): VerificationResult {
+    if (!(password.length > SecurePass.PasswordBytesMin && password.length < SecurePass.PasswordBytesMax)) {
+      throw new SecurePassError(
+        `Length of Password Buffer must be between ${SecurePass.PasswordBytesMin} and ${SecurePass.PasswordBytesMax}`
+      );
+    }
+
+    if (hash.length != SecurePass.HashBytes) {
+      throw new SecurePassError(`Length of Hash Buffer must be between ${SecurePass.HashBytes}`);
+    }
+
+    if (!this.recognizedAlgorithm(hash)) {
+      return VerificationResult.InvalidOrUnrecognized;
+    }
+
+    if (sodium.crypto_pwhash_str_verify(hash, password) == false) {
+      return VerificationResult.Invalid;
+    }
+
+    if (sodium.crypto_pwhash_str_needs_rehash(hash, this.opsLimit, this.memLimit)) {
+      return VerificationResult.ValidNeedsRehash;
+    }
+
+    return VerificationResult.Valid;
   }
 
   private async hashPasswordAsync(password: Buffer): Promise<Buffer> {
