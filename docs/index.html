@@ -1,0 +1,228 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>SecurePass (argon2-pass)</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">SecurePass (argon2-pass)</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1> SecurePass (argon2-pass)</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<p align="center"><img width="60%" src="https://raw.github.com/DrBarnabus/secure-pass/master/media/logo_transparent_background.png"></p>
+				<p><a href="https://www.npmjs.com/package/argon2-pass"><img src="https://img.shields.io/npm/v/argon2-pass.svg" alt="NPM Version"></a>
+					<a href="https://www.npmjs.com/package/argon2-pass"><img src="https://img.shields.io/npm/dw/argon2-pass.svg" alt="NPM Downloads"></a>
+					<a href="https://travis-ci.org/DrBarnabus/secure-pass"><img src="https://travis-ci.org/DrBarnabus/secure-pass.svg?branch=master" alt="Build Status"></a>
+					<a href="https://codecov.io/gh/DrBarnabus/secure-pass"><img src="https://codecov.io/gh/DrBarnabus/secure-pass/branch/master/graph/badge.svg" alt="Test Coverage"></a>
+					<a href="https://david-dm.org/drbarnabus/secure-pass"><img src="https://david-dm.org/drbarnabus/secure-pass.svg" alt="Dependencies"></a>
+					<a href="https://david-dm.org/drbarnabus/secure-pass?type=dev"><img src="https://david-dm.org/drbarnabus/secure-pass/dev-status.svg" alt="devDependencies"></a>
+					<a href="https://snyk.io/test/github/DrBarnabus/secure-pass?targetFile=package.json"><img src="https://snyk.io/test/github/DrBarnabus/secure-pass/badge.svg?targetFile=package.json" alt="Known Vulnerabilities"></a>
+				<a href="https://www.codacy.com/app/DrBarnabus/secure-pass?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=DrBarnabus/secure-pass&amp;utm_campaign=Badge_Grade"><img src="https://api.codacy.com/project/badge/Grade/86e94a6a25c44d7bb7e514e7e2747e24" alt="Code Quality"></a></p>
+				<h1 id="introduction">Introduction</h1>
+				<p>SecurePass (argon2-pass) is a module for the creation of hashes from passwords, allowing you to store passwords securely. The module also provides a facility for the generation and verification of one time authentication tokens for use in your own password reset flows. This module is a wrapper for <a href="https://download.libsodium.org/doc/">libsodium</a>&#39;s implementation of the <a href="https://en.wikipedia.org/wiki/Argon2">Argon2ID</a> password hashing algorithm and Poly1305.</p>
+				<h1 id="features">Features</h1>
+				<ul>
+					<li>Uses the state of the art, secure modern password hashing algorithm <a href="https://en.wikipedia.org/wiki/Argon2">Argon2ID</a>.</li>
+					<li>Uses Buffer&#39;s for safer memory management.</li>
+					<li>Allows for generation of one time use authentication tokens to be used in your own password reset flow.</li>
+					<li>Easily configurable work factors, allowing you to increase the security of your hashes over time.</li>
+					<li>Three default difficulty configurations for password hashing, as defined in <a href="https://download.libsodium.org/doc/">libsodium</a>&#39;s implementation. Allowing you to configure your security level based on some recommended predefined values.</li>
+					<li>Simple rehashing of passwords you are already storing. Allowing you to improve the security of your hashes over time.</li>
+					<li>The module is written in typescript and ships with a type definition file by default.</li>
+				</ul>
+				<h1 id="installation">Installation</h1>
+				<p>Install argon2-pass using <a href="https://yarnpkg.com/en/package/argon2-pass"><code>yarn</code></a>:</p>
+				<pre><code class="language-bash">yarn add argon2-pass</code></pre>
+				<p>Or via <a href="https://www.npmjs.com/package/argon2-pass"><code>npm</code></a>:</p>
+				<pre><code class="language-bash">npm install argon2-pass</code></pre>
+				<h1 id="usage">Usage</h1>
+				<p><strong>Coming Soon</strong></p>
+				<h1 id="testing">Testing</h1>
+				<p>This package is configured with <a href="https://github.com/facebook/jest">jest</a> tests, these tests ensure that the module is working correctly and as specified as well as generating code coverage reports to ensure every line of code is covered by a unit test.</p>
+				<p>To run the jest tests manualy run the test script defined in package.json:</p>
+				<pre><code class="language-bash">yarn <span class="hljs-built_in">test</span></code></pre>
+				<p>This module also has the following automated testing:</p>
+				<ul>
+					<li>CI Builds on <a href="https://travis-ci.org/DrBarnabus/secure-pass">Travis</a>.</li>
+					<li>Code Coverage Reports on <a href="https://codecov.io/gh/DrBarnabus/secure-pass">CodeCov</a>.</li>
+					<li>Dependency Update Checks on <a href="https://david-dm.org/drbarnabus/secure-pass">david-dm</a>.</li>
+					<li>Dependency Vulnerabilities Checks on <a href="https://snyk.io/test/github/DrBarnabus/secure-pass?targetFile=package.json">snyk</a>.</li>
+					<li>Automated Code Review and Quality Report on <a href="https://www.codacy.com/app/DrBarnabus/secure-pass?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=DrBarnabus/secure-pass&amp;utm_campaign=Badge_Grade">codacy</a>.</li>
+				</ul>
+				<h1 id="acknowledgements">Acknowledgements</h1>
+				<ul>
+					<li>Special thanks to the creators of <a href="https://download.libsodium.org/doc/">libsodium</a> and <a href="https://github.com/sodium-friends/sodium-native">sodium-native</a> both of which are used extensively in this package, and without which the creation of this module wouldn&#39;t have been possible.</li>
+				</ul>
+				<h1 id="licence">Licence</h1>
+				<p>Licensed under <a href="./LICENSE">MIT</a>.</p>
+				<p>Copyright (C) 2018 DrBarnabus</p>
+				<!-- Links -->
+				<!-- Badges -->
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-enum">
+						<a href="enums/verificationresult.html" class="tsd-kind-icon">Verification<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/securepass.html" class="tsd-kind-icon">Secure<wbr>Pass</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/securepasserror.html" class="tsd-kind-icon">Secure<wbr>Pass<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/securepassoptionserror.html" class="tsd-kind-icon">Secure<wbr>Pass<wbr>Options<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/generateonetimeauthcoderesult.html" class="tsd-kind-icon">Generate<wbr>One<wbr>Time<wbr>Auth<wbr>Code<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/generateonetimeauthresult.html" class="tsd-kind-icon">Generate<wbr>One<wbr>Time<wbr>Auth<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/securepassoptions.html" class="tsd-kind-icon">Secure<wbr>Pass<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#hashpasswordcallback" class="tsd-kind-icon">Hash<wbr>Password<wbr>Callback</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#verifyhashcallback" class="tsd-kind-icon">Verify<wbr>Hash<wbr>Callback</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#bufferfromsafebase64" class="tsd-kind-icon">buffer<wbr>From<wbr>Safe<wbr>Base64</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#buffertosafebase64" class="tsd-kind-icon">buffer<wbr>ToSafe<wbr>Base64</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>
