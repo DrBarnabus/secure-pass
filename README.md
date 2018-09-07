@@ -1,4 +1,4 @@
-<p align="center"><img width="60%" src="https://github.com/DrBarnabus/secure-pass/blob/master/media/logo_transparent_background.png"></p>
+<p align="center"><img width="60%" src="https://raw.github.com/DrBarnabus/secure-pass/master/media/logo_transparent_background.png"></p>
 
 [![NPM Version][npm-badge]][npm-url]
 [![NPM Downloads][npmd-badge]][npm-url]
@@ -65,12 +65,12 @@ Copyright (C) 2018 DrBarnabus
 [npmd-badge]: https://img.shields.io/npm/dw/argon2-pass.svg?style=flat-square
 [travis-badge]: https://img.shields.io/travis/DrBarnabus/secure-pass/master.svg?style=flat-square
 [travis-url]: https://travis-ci.org/DrBarnabus/secure-pass
-[dependencies-badge]: https://david-dm.org/drbarnabus/argon2-pass.svg?style=flat-square
 [codecov-badge]: https://img.shields.io/codecov/c/github/DrBarnabus/secure-pass/master.svg?style=flat-square
 [codecov-url]: https://codecov.io/gh/DrBarnabus/secure-pass
-[dependencies-url]: https://david-dm.org/drbarnabus/argon2-pass
-[devDependencies-badge]: https://david-dm.org/drbarnabus/argon2-pass/dev-status.svg?style=flat-square
-[devDependencies-url]: https://david-dm.org/drbarnabus/argon2-pass?type=dev
+[dependencies-badge]: https://david-dm.org/drbarnabus/secure-pass.svg?style=flat-square
+[dependencies-url]: https://david-dm.org/drbarnabus/secure-pass
+[devDependencies-badge]: https://david-dm.org/drbarnabus/secure-pass/dev-status.svg?style=flat-square
+[devDependencies-url]: https://david-dm.org/drbarnabus/secure-pass?type=dev
 [snyk-badge]: https://snyk.io/test/github/DrBarnabus/secure-pass/badge.svg?targetFile=package.json&style=flat-square
 [snyk-url]: https://snyk.io/test/github/DrBarnabus/secure-pass?targetFile=package.json
 [codacy-badge]: https://img.shields.io/codacy/grade/e27821fb6289410b8f58338c7e0bc686/master.svg?style=flat-square
