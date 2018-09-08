@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.2.0] - 2018-09-08
 ### Added
 - Added JSDoc comments to all functions and important objects. This was then used with the TypeDoc module to generate a documentation site for the package.
 - Added synchronous versions of hash and verify. `hashPasswordSync()` and `verifyHashSync()`.
@@ -14,7 +14,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Removed
 
-- Removed `getMemLimit()` and `getOpsLimit()` functions, replaced with getters and setters as detailed above.
+- **Possibly Breaking Change:** Removed `getMemLimit()` and `getOpsLimit()` functions, replaced with getters and setters as detailed above.
 
 ## [0.1.3] - 2018-09-06
 ### Added
