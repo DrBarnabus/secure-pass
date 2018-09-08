@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file. This projec
 ### Added
 - Added JSDoc comments to all functions and important objects. This was then used with the TypeDoc module to generate a documentation site for the package.
 - Added synchronous versions of hash and verify. `hashPasswordSync()` and `verifyHashSync()`.
+- Added get and set functions for MemLimit. `MemLimit()` and `MemLimit(newValue)`.
+- Added get and set functions for OpsLimit. `OpsLimit()` and `OpsLimit(newValue)`.
+
+### Removed
+
+- Removed getMemLimit() and getOpsLimit() functions, replaced with getters and setters as detailed above.
 
 ## [0.1.3] - 2018-09-06
 ### Added

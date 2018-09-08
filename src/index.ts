@@ -252,7 +252,6 @@ export class SecurePass {
       if (options.memLimit >= SecurePass.MemLimitMinimum && options.memLimit <= SecurePass.MemLimitMaximum) {
         this.memLimit = options.memLimit;
       } else {
-        // tslint:disable-next-line:max-line-length
         throw new SecurePassOptionsError(
           `SecurePass: Invalid Memory Limit Configured. Value must be between ${SecurePass.MemLimitMinimum} and ${
             SecurePass.MemLimitMaximum
@@ -269,7 +268,6 @@ export class SecurePass {
       if (options.opsLimit >= SecurePass.OpsLimitMinimum && options.opsLimit <= SecurePass.OpsLimitMaximum) {
         this.opsLimit = options.opsLimit;
       } else {
-        // tslint:disable-next-line:max-line-length
         throw new SecurePassOptionsError(
           `Secure Pass: Invalid Operations Limit Configured. Value must be between ${SecurePass.OpsLimitMinimum} and ${
             SecurePass.OpsLimitMaximum
@@ -282,15 +280,48 @@ export class SecurePass {
   /**
    * Returns the currently configured Memory Limit.
    */
-  public getMemLimit(): number {
+  public get MemLimit(): number {
     return this.memLimit;
+  }
+
+  /**
+   * Sets the Memory Limit to the new value provided.
+   * @param newValue - The new Memory Limit.
+   */
+  public set MemLimit(newValue: number) {
+    // Check configured Memory Limit is within allowed values.
+    if (newValue >= SecurePass.MemLimitMinimum && newValue <= SecurePass.MemLimitMaximum) {
+      this.memLimit = newValue;
+    } else {
+      throw new SecurePassOptionsError(
+        `SecurePass: Invalid Memory Limit Configured. Value must be between ${SecurePass.MemLimitMinimum} and ${
+          SecurePass.MemLimitMaximum
+        }`
+      );
+    }
   }
 
   /**
    * Returns the currently configured Operations Limit.
    */
-  public getOpsLimit(): number {
+  public get OpsLimit(): number {
     return this.opsLimit;
+  }
+
+  /**
+   * Sets the Operations Limit to the new value provided.
+   */
+  public set OpsLimit(newValue: number) {
+    // Check configured Operations Limit is within allowed values.
+    if (newValue >= SecurePass.OpsLimitMinimum && newValue <= SecurePass.OpsLimitMaximum) {
+      this.opsLimit = newValue;
+    } else {
+      throw new SecurePassOptionsError(
+        `Secure Pass: Invalid Operations Limit Configured. Value must be between ${SecurePass.OpsLimitMinimum} and ${
+          SecurePass.OpsLimitMaximum
+        }`
+      );
+    }
   }
 
   /**
