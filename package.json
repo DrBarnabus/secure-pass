@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
     "pretest": "yarn lint",
-    "test": "jest -i",
+    "test": "jest",
     "build": "tsc",
     "prepublishonly": "yarn build"
   },

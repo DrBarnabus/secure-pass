@@ -16,6 +16,14 @@ describe('SecurePass - Constants', () => {
     expect(SecurePass.SaltBytes).toBeDefined();
   });
 
+  test('MacBytes Constant should be defined.', () => {
+    expect(SecurePass.MacBytes).toBeDefined();
+  });
+
+  test('KeyBytes Constant should be defined.', () => {
+    expect(SecurePass.KeyBytes).toBeDefined();
+  });
+
   test('MemLimit* Constants should be defined.', () => {
     expect(SecurePass.MemLimitDefault).toBeDefined();
     expect(SecurePass.MemLimitInteractive).toBeDefined();

@@ -85,6 +85,18 @@ export class SecurePass {
   public static readonly SaltBytes: number = 16;
 
   /**
+   * Length of the Mac buffer returned by generateOneTimeAuth.
+   * @readonly
+   */
+  public static readonly MacBytes: number = 16;
+
+  /**
+   * Length of the secret Key buffer returned by generateOneTimeAuth and generateOneTimeAuthCode.
+   * @readonly
+   */
+  public static readonly KeyBytes: number = 32;
+
+  /**
    * Default Memory Limit. 64MB.
    * @readonly
    */
@@ -178,9 +190,9 @@ export class SecurePass {
    * @param message - The message to be used as the base of the one time authentication key.
    */
   public static generateOneTimeAuth(message: Buffer): GenerateOneTimeAuthResult {
-    const mac = Buffer.alloc(sodium.crypto_onetimeauth_BYTES);
+    const mac = Buffer.alloc(SecurePass.MacBytes);
 
-    const key = Buffer.alloc(sodium.crypto_onetimeauth_KEYBYTES);
+    const key = Buffer.alloc(SecurePass.KeyBytes);
     sodium.randombytes_buf(key);
 
     sodium.crypto_onetimeauth(mac, message, key);
