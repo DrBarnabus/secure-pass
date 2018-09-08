@@ -84,6 +84,8 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="securepass.html#hashbytes" class="tsd-kind-icon">Hash<wbr>Bytes</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="securepass.html#keybytes" class="tsd-kind-icon">Key<wbr>Bytes</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="securepass.html#macbytes" class="tsd-kind-icon">Mac<wbr>Bytes</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="securepass.html#memlimitdefault" class="tsd-kind-icon">Mem<wbr>Limit<wbr>Default</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="securepass.html#memlimitinteractive" class="tsd-kind-icon">Mem<wbr>Limit<wbr>Interactive</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="securepass.html#memlimitmaximum" class="tsd-kind-icon">Mem<wbr>Limit<wbr>Maximum</a></li>
@@ -102,12 +104,19 @@
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
+							<h3>Accessors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="securepass.html#memlimit" class="tsd-kind-icon">Mem<wbr>Limit</a></li>
+								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="securepass.html#opslimit" class="tsd-kind-icon">Ops<wbr>Limit</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="securepass.html#getmemlimit" class="tsd-kind-icon">get<wbr>Mem<wbr>Limit</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="securepass.html#getopslimit" class="tsd-kind-icon">get<wbr>Ops<wbr>Limit</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="securepass.html#hashpassword" class="tsd-kind-icon">hash<wbr>Password</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="securepass.html#hashpasswordsync" class="tsd-kind-icon">hash<wbr>Password<wbr>Sync</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="securepass.html#verifyhash" class="tsd-kind-icon">verify<wbr>Hash</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="securepass.html#verifyhashsync" class="tsd-kind-icon">verify<wbr>Hash<wbr>Sync</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="securepass.html#generateonetimeauth" class="tsd-kind-icon">generate<wbr>One<wbr>Time<wbr>Auth</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="securepass.html#generateonetimeauthcode" class="tsd-kind-icon">generate<wbr>One<wbr>Time<wbr>Auth<wbr>Code</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="securepass.html#verifyonetimeauth" class="tsd-kind-icon">verify<wbr>One<wbr>Time<wbr>Auth</a></li>
@@ -129,7 +138,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/8ca8af2/src/index.ts#L234">index.ts:234</a></li>
+									<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/a1e91a0/src/index.ts#L246">index.ts:246</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -159,10 +168,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
 					<a name="hashbytes" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> Hash<wbr>Bytes</h3>
-					<div class="tsd-signature tsd-kind-icon">Hash<wbr>Bytes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;sodium.crypto_pwhash_STRBYTES</span></div>
+					<div class="tsd-signature tsd-kind-icon">Hash<wbr>Bytes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;128</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/8ca8af2/src/index.ts#L79">index.ts:79</a></li>
+							<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/a1e91a0/src/index.ts#L79">index.ts:79</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -176,12 +185,50 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
-					<a name="memlimitdefault" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> Mem<wbr>Limit<wbr>Default</h3>
-					<div class="tsd-signature tsd-kind-icon">Mem<wbr>Limit<wbr>Default<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;sodium.crypto_pwhash_MEMLIMIT_INTERACTIVE</span></div>
+					<a name="keybytes" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> Key<wbr>Bytes</h3>
+					<div class="tsd-signature tsd-kind-icon">Key<wbr>Bytes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;32</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/8ca8af2/src/index.ts#L91">index.ts:91</a></li>
+							<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/a1e91a0/src/index.ts#L97">index.ts:97</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Length of the secret Key buffer returned by generateOneTimeAuth and generateOneTimeAuthCode.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>readonly</dt>
+							<dd></dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
+					<a name="macbytes" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> Mac<wbr>Bytes</h3>
+					<div class="tsd-signature tsd-kind-icon">Mac<wbr>Bytes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;16</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/a1e91a0/src/index.ts#L91">index.ts:91</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Length of the Mac buffer returned by generateOneTimeAuth.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>readonly</dt>
+							<dd></dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
+					<a name="memlimitdefault" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> Mem<wbr>Limit<wbr>Default</h3>
+					<div class="tsd-signature tsd-kind-icon">Mem<wbr>Limit<wbr>Default<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;67108864</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/a1e91a0/src/index.ts#L103">index.ts:103</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -197,10 +244,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
 					<a name="memlimitinteractive" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> Mem<wbr>Limit<wbr>Interactive</h3>
-					<div class="tsd-signature tsd-kind-icon">Mem<wbr>Limit<wbr>Interactive<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;sodium.crypto_pwhash_MEMLIMIT_INTERACTIVE</span></div>
+					<div class="tsd-signature tsd-kind-icon">Mem<wbr>Limit<wbr>Interactive<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;67108864</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/8ca8af2/src/index.ts#L100">index.ts:100</a></li>
+							<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/a1e91a0/src/index.ts#L112">index.ts:112</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -219,10 +266,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
 					<a name="memlimitmaximum" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> Mem<wbr>Limit<wbr>Maximum</h3>
-					<div class="tsd-signature tsd-kind-icon">Mem<wbr>Limit<wbr>Maximum<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;sodium.crypto_pwhash_MEMLIMIT_MAX</span></div>
+					<div class="tsd-signature tsd-kind-icon">Mem<wbr>Limit<wbr>Maximum<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;4398046510080</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/8ca8af2/src/index.ts#L129">index.ts:129</a></li>
+							<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/a1e91a0/src/index.ts#L141">index.ts:141</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -238,10 +285,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
 					<a name="memlimitminimum" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> Mem<wbr>Limit<wbr>Minimum</h3>
-					<div class="tsd-signature tsd-kind-icon">Mem<wbr>Limit<wbr>Minimum<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;sodium.crypto_pwhash_MEMLIMIT_MIN</span></div>
+					<div class="tsd-signature tsd-kind-icon">Mem<wbr>Limit<wbr>Minimum<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;8192</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/8ca8af2/src/index.ts#L123">index.ts:123</a></li>
+							<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/a1e91a0/src/index.ts#L135">index.ts:135</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -257,10 +304,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
 					<a name="memlimitmoderate" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> Mem<wbr>Limit<wbr>Moderate</h3>
-					<div class="tsd-signature tsd-kind-icon">Mem<wbr>Limit<wbr>Moderate<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;sodium.crypto_pwhash_MEMLIMIT_MODERATE</span></div>
+					<div class="tsd-signature tsd-kind-icon">Mem<wbr>Limit<wbr>Moderate<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;268435456</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/8ca8af2/src/index.ts#L109">index.ts:109</a></li>
+							<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/a1e91a0/src/index.ts#L121">index.ts:121</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -279,10 +326,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
 					<a name="memlimitsensitive" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> Mem<wbr>Limit<wbr>Sensitive</h3>
-					<div class="tsd-signature tsd-kind-icon">Mem<wbr>Limit<wbr>Sensitive<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;sodium.crypto_pwhash_MEMLIMIT_SENSITIVE</span></div>
+					<div class="tsd-signature tsd-kind-icon">Mem<wbr>Limit<wbr>Sensitive<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1073741824</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/8ca8af2/src/index.ts#L117">index.ts:117</a></li>
+							<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/a1e91a0/src/index.ts#L129">index.ts:129</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -297,10 +344,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
 					<a name="opslimitdefault" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> Ops<wbr>Limit<wbr>Default</h3>
-					<div class="tsd-signature tsd-kind-icon">Ops<wbr>Limit<wbr>Default<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;sodium.crypto_pwhash_OPSLIMIT_INTERACTIVE</span></div>
+					<div class="tsd-signature tsd-kind-icon">Ops<wbr>Limit<wbr>Default<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;2</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/8ca8af2/src/index.ts#L135">index.ts:135</a></li>
+							<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/a1e91a0/src/index.ts#L147">index.ts:147</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -316,10 +363,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
 					<a name="opslimitinteractive" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> Ops<wbr>Limit<wbr>Interactive</h3>
-					<div class="tsd-signature tsd-kind-icon">Ops<wbr>Limit<wbr>Interactive<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;sodium.crypto_pwhash_OPSLIMIT_INTERACTIVE</span></div>
+					<div class="tsd-signature tsd-kind-icon">Ops<wbr>Limit<wbr>Interactive<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;2</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/8ca8af2/src/index.ts#L144">index.ts:144</a></li>
+							<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/a1e91a0/src/index.ts#L156">index.ts:156</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -338,10 +385,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
 					<a name="opslimitmaximum" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> Ops<wbr>Limit<wbr>Maximum</h3>
-					<div class="tsd-signature tsd-kind-icon">Ops<wbr>Limit<wbr>Maximum<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;sodium.crypto_pwhash_OPSLIMIT_MAX</span></div>
+					<div class="tsd-signature tsd-kind-icon">Ops<wbr>Limit<wbr>Maximum<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;4294967295</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/8ca8af2/src/index.ts#L173">index.ts:173</a></li>
+							<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/a1e91a0/src/index.ts#L185">index.ts:185</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -357,10 +404,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
 					<a name="opslimitminimum" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> Ops<wbr>Limit<wbr>Minimum</h3>
-					<div class="tsd-signature tsd-kind-icon">Ops<wbr>Limit<wbr>Minimum<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;sodium.crypto_pwhash_OPSLIMIT_MIN</span></div>
+					<div class="tsd-signature tsd-kind-icon">Ops<wbr>Limit<wbr>Minimum<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/8ca8af2/src/index.ts#L167">index.ts:167</a></li>
+							<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/a1e91a0/src/index.ts#L179">index.ts:179</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -376,10 +423,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
 					<a name="opslimitmoderate" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> Ops<wbr>Limit<wbr>Moderate</h3>
-					<div class="tsd-signature tsd-kind-icon">Ops<wbr>Limit<wbr>Moderate<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;sodium.crypto_pwhash_OPSLIMIT_MODERATE</span></div>
+					<div class="tsd-signature tsd-kind-icon">Ops<wbr>Limit<wbr>Moderate<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;3</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/8ca8af2/src/index.ts#L153">index.ts:153</a></li>
+							<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/a1e91a0/src/index.ts#L165">index.ts:165</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -398,10 +445,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
 					<a name="opslimitsensitive" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> Ops<wbr>Limit<wbr>Sensitive</h3>
-					<div class="tsd-signature tsd-kind-icon">Ops<wbr>Limit<wbr>Sensitive<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;sodium.crypto_pwhash_OPSLIMIT_SENSITIVE</span></div>
+					<div class="tsd-signature tsd-kind-icon">Ops<wbr>Limit<wbr>Sensitive<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;4</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/8ca8af2/src/index.ts#L161">index.ts:161</a></li>
+							<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/a1e91a0/src/index.ts#L173">index.ts:173</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -416,10 +463,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
 					<a name="passwordbytesmax" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> Password<wbr>Bytes<wbr>Max</h3>
-					<div class="tsd-signature tsd-kind-icon">Password<wbr>Bytes<wbr>Max<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;sodium.crypto_pwhash_PASSWD_MAX</span></div>
+					<div class="tsd-signature tsd-kind-icon">Password<wbr>Bytes<wbr>Max<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;4294967295</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/8ca8af2/src/index.ts#L73">index.ts:73</a></li>
+							<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/a1e91a0/src/index.ts#L73">index.ts:73</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -435,10 +482,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
 					<a name="passwordbytesmin" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> Password<wbr>Bytes<wbr>Min</h3>
-					<div class="tsd-signature tsd-kind-icon">Password<wbr>Bytes<wbr>Min<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;sodium.crypto_pwhash_PASSWD_MIN</span></div>
+					<div class="tsd-signature tsd-kind-icon">Password<wbr>Bytes<wbr>Min<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/8ca8af2/src/index.ts#L67">index.ts:67</a></li>
+							<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/a1e91a0/src/index.ts#L67">index.ts:67</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -454,10 +501,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
 					<a name="saltbytes" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> Salt<wbr>Bytes</h3>
-					<div class="tsd-signature tsd-kind-icon">Salt<wbr>Bytes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;sodium.crypto_pwhash_SALTBYTES</span></div>
+					<div class="tsd-signature tsd-kind-icon">Salt<wbr>Bytes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;16</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/8ca8af2/src/index.ts#L85">index.ts:85</a></li>
+							<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/a1e91a0/src/index.ts#L85">index.ts:85</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -472,18 +519,19 @@
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="getmemlimit" class="tsd-anchor"></a>
-					<h3>get<wbr>Mem<wbr>Limit</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Mem<wbr>Limit<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+				<h2>Accessors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+					<a name="memlimit" class="tsd-anchor"></a>
+					<h3>Mem<wbr>Limit</h3>
+					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> MemLimit<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> MemLimit<span class="tsd-signature-symbol">(</span>newValue<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/8ca8af2/src/index.ts#L285">index.ts:285</a></li>
+									<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/a1e91a0/src/index.ts#L295">index.ts:295</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -493,19 +541,44 @@
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
 						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/a1e91a0/src/index.ts#L303">index.ts:303</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the Memory Limit to the new value provided.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>newValue: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>The new Memory Limit.</p>
+										</div>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="getopslimit" class="tsd-anchor"></a>
-					<h3>get<wbr>Ops<wbr>Limit</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Ops<wbr>Limit<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+					<a name="opslimit" class="tsd-anchor"></a>
+					<h3>Ops<wbr>Limit</h3>
+					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> OpsLimit<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> OpsLimit<span class="tsd-signature-symbol">(</span>newValue<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/8ca8af2/src/index.ts#L292">index.ts:292</a></li>
+									<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/a1e91a0/src/index.ts#L319">index.ts:319</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -515,8 +588,30 @@
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
 						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/a1e91a0/src/index.ts#L326">index.ts:326</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the Operations Limit to the new value provided.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>newValue: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
 					</ul>
 				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="hashpassword" class="tsd-anchor"></a>
 					<h3>hash<wbr>Password</h3>
@@ -528,12 +623,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/8ca8af2/src/index.ts#L301">index.ts:301</a></li>
+									<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/a1e91a0/src/index.ts#L344">index.ts:344</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Takes the provided password buffer and returns a Argon2ID hash.</p>
+									<p>Takes the provided password and returns the derived Argon2ID hash.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -541,7 +636,7 @@
 								<li>
 									<h5>password: <span class="tsd-signature-type">Buffer</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>The password buffer to be hashed.</p>
+										<p>The password to be hashed.</p>
 									</div>
 								</li>
 							</ul>
@@ -550,7 +645,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/8ca8af2/src/index.ts#L302">index.ts:302</a></li>
+									<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/a1e91a0/src/index.ts#L345">index.ts:345</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -567,6 +662,37 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="hashpasswordsync" class="tsd-anchor"></a>
+					<h3>hash<wbr>Password<wbr>Sync</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">hash<wbr>Password<wbr>Sync<span class="tsd-signature-symbol">(</span>password<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/a1e91a0/src/index.ts#L358">index.ts:358</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Takes the provided password and returns the derived Argon2ID hash.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>password: <span class="tsd-signature-type">Buffer</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The password to be hashed.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Buffer</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="verifyhash" class="tsd-anchor"></a>
 					<h3>verify<wbr>Hash</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -577,12 +703,13 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/8ca8af2/src/index.ts#L316">index.ts:316</a></li>
+									<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/a1e91a0/src/index.ts#L377">index.ts:377</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Takes the provided password buffer and the hash buffer and returns the result of the verification.</p>
+									<p>Takes the provided password and the hash buffer
+									and returns the result of the verification as an enumeration value.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -590,13 +717,13 @@
 								<li>
 									<h5>password: <span class="tsd-signature-type">Buffer</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>The password buffer to be verified.</p>
+										<p>The password to be verified.</p>
 									</div>
 								</li>
 								<li>
 									<h5>hash: <span class="tsd-signature-type">Buffer</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>The has buffer to be verified agains.</p>
+										<p>The hash to be verified against.</p>
 									</div>
 								</li>
 							</ul>
@@ -605,7 +732,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/8ca8af2/src/index.ts#L317">index.ts:317</a></li>
+									<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/a1e91a0/src/index.ts#L378">index.ts:378</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -624,6 +751,44 @@
 						</li>
 					</ul>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="verifyhashsync" class="tsd-anchor"></a>
+					<h3>verify<wbr>Hash<wbr>Sync</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">verify<wbr>Hash<wbr>Sync<span class="tsd-signature-symbol">(</span>password<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span>, hash<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../enums/verificationresult.html" class="tsd-signature-type">VerificationResult</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/a1e91a0/src/index.ts#L393">index.ts:393</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Takes the provided password and the hash buffer
+									and returns the result of the verification as an enumeration value.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>password: <span class="tsd-signature-type">Buffer</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The password to be verified.</p>
+									</div>
+								</li>
+								<li>
+									<h5>hash: <span class="tsd-signature-type">Buffer</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The hash to be verified against.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../enums/verificationresult.html" class="tsd-signature-type">VerificationResult</a></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
 					<a name="generateonetimeauth" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> generate<wbr>One<wbr>Time<wbr>Auth</h3>
@@ -634,7 +799,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/8ca8af2/src/index.ts#L180">index.ts:180</a></li>
+									<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/a1e91a0/src/index.ts#L192">index.ts:192</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -666,7 +831,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/8ca8af2/src/index.ts#L207">index.ts:207</a></li>
+									<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/a1e91a0/src/index.ts#L219">index.ts:219</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -698,7 +863,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/8ca8af2/src/index.ts#L198">index.ts:198</a></li>
+									<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/a1e91a0/src/index.ts#L210">index.ts:210</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -742,7 +907,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/8ca8af2/src/index.ts#L218">index.ts:218</a></li>
+									<li>Defined in <a href="https://github.com/DrBarnabus/secure-pass/blob/a1e91a0/src/index.ts#L230">index.ts:230</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -796,6 +961,12 @@
 								<a href="securepass.html#hashbytes" class="tsd-kind-icon">Hash<wbr>Bytes</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
+								<a href="securepass.html#keybytes" class="tsd-kind-icon">Key<wbr>Bytes</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
+								<a href="securepass.html#macbytes" class="tsd-kind-icon">Mac<wbr>Bytes</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
 								<a href="securepass.html#memlimitdefault" class="tsd-kind-icon">Mem<wbr>Limit<wbr>Default</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
@@ -840,17 +1011,23 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
 								<a href="securepass.html#saltbytes" class="tsd-kind-icon">Salt<wbr>Bytes</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="securepass.html#getmemlimit" class="tsd-kind-icon">get<wbr>Mem<wbr>Limit</a>
+							<li class=" tsd-kind-accessor tsd-parent-kind-class">
+								<a href="securepass.html#memlimit" class="tsd-kind-icon">Mem<wbr>Limit</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="securepass.html#getopslimit" class="tsd-kind-icon">get<wbr>Ops<wbr>Limit</a>
+							<li class=" tsd-kind-accessor tsd-parent-kind-class">
+								<a href="securepass.html#opslimit" class="tsd-kind-icon">Ops<wbr>Limit</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="securepass.html#hashpassword" class="tsd-kind-icon">hash<wbr>Password</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="securepass.html#hashpasswordsync" class="tsd-kind-icon">hash<wbr>Password<wbr>Sync</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="securepass.html#verifyhash" class="tsd-kind-icon">verify<wbr>Hash</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="securepass.html#verifyhashsync" class="tsd-kind-icon">verify<wbr>Hash<wbr>Sync</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
 								<a href="securepass.html#generateonetimeauth" class="tsd-kind-icon">generate<wbr>One<wbr>Time<wbr>Auth</a>
