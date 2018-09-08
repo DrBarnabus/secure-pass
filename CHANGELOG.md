@@ -10,7 +10,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Removed
 
-- Removed getMemLimit() and getOpsLimit() functions, replaced with getters and setters as detailed above.
+- Removed `getMemLimit()` and `getOpsLimit()` functions, replaced with getters and setters as detailed above.
 
 ## [0.1.3] - 2018-09-06
 ### Added

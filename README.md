@@ -70,7 +70,7 @@ async function main() {
 main();
 ```
 
-For full documentation, please refer to the full [documentation site](https://drbarnabus.github.io/secure-pass/). The documentation was generated automaticaly with [TypeDoc].
+For full documentation, please refer to the full [documentation site](https://drbarnabus.github.io/secure-pass/globals.html). The documentation was generated automaticaly with [TypeDoc].
 
 # Testing
 
