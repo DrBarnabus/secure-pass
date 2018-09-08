@@ -95,7 +95,7 @@ This module also has the following automated testing:
 - Special thanks to the creators of [libsodium] and [sodium-native] both of which are used extensively in this package, and without which the creation of this module wouldn't have been possible.
 
 # Licence
-Licensed under [MIT](./LICENSE).
+Licensed under [MIT](https://raw.github.com/DrBarnabus/secure-pass/master/LICENSE).
 
 Copyright (C) 2018 DrBarnabus
 
