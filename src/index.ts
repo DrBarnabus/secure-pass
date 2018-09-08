@@ -64,31 +64,31 @@ export class SecurePass {
    * Minimum Length for the Password input buffer.
    * @readonly
    */
-  public static readonly PasswordBytesMin: number = sodium.crypto_pwhash_PASSWD_MIN;
+  public static readonly PasswordBytesMin: number = 0;
 
   /**
    * Maxium Length for the Password input buffer.
    * @readonly
    */
-  public static readonly PasswordBytesMax: number = sodium.crypto_pwhash_PASSWD_MAX;
+  public static readonly PasswordBytesMax: number = 4294967295;
 
   /**
    * Length of the Password Hash output buffer.
    * @readonly
    */
-  public static readonly HashBytes: number = sodium.crypto_pwhash_STRBYTES;
+  public static readonly HashBytes: number = 128;
 
   /**
    * Length of the Salt buffer.
    * @readonly
    */
-  public static readonly SaltBytes: number = sodium.crypto_pwhash_SALTBYTES;
+  public static readonly SaltBytes: number = 16;
 
   /**
    * Default Memory Limit. 64MB.
    * @readonly
    */
-  public static readonly MemLimitDefault: number = sodium.crypto_pwhash_MEMLIMIT_INTERACTIVE;
+  public static readonly MemLimitDefault: number = 67108864;
 
   /**
    * Interactive Memory Limit. 64MB. This value is the same as MemLimitDefault.
@@ -97,7 +97,7 @@ export class SecurePass {
    * Choosing a higher value such as MemLimitModerate, MemLimitSensitive or a custom value may improve security.
    * @readonly
    */
-  public static readonly MemLimitInteractive: number = sodium.crypto_pwhash_MEMLIMIT_INTERACTIVE;
+  public static readonly MemLimitInteractive: number = 67108864;
 
   /**
    * Moderate Memory Limit. 256MB.
@@ -106,7 +106,7 @@ export class SecurePass {
    * Use of this option requires a minimum of 256 MiB of dedicated RAM.
    * @readonly
    */
-  public static readonly MemLimitModerate: number = sodium.crypto_pwhash_MEMLIMIT_MODERATE;
+  public static readonly MemLimitModerate: number = 268435456;
 
   /**
    * Sensitive Memory Limit. 1GB.
@@ -114,25 +114,25 @@ export class SecurePass {
    * and non-interactive operations.
    * Use of this option requires a minimum of 1024 MiB of dedicated RAM.
    */
-  public static readonly MemLimitSensitive: number = sodium.crypto_pwhash_MEMLIMIT_SENSITIVE;
+  public static readonly MemLimitSensitive: number = 1073741824;
 
   /**
    * The Minimum Allowed Memory Limit. 8KB.
    * @readonly
    */
-  public static readonly MemLimitMinimum: number = sodium.crypto_pwhash_MEMLIMIT_MIN;
+  public static readonly MemLimitMinimum: number = 8192;
 
   /**
    * The Maximum Allowed Memory Limit. 4TB.
    * @readonly
    */
-  public static readonly MemLimitMaximum: number = sodium.crypto_pwhash_MEMLIMIT_MAX;
+  public static readonly MemLimitMaximum: number = 4398046510080;
 
   /**
    * Default Operations Limit. 2 Operations.
    * @readonly
    */
-  public static readonly OpsLimitDefault: number = sodium.crypto_pwhash_OPSLIMIT_INTERACTIVE;
+  public static readonly OpsLimitDefault: number = 2;
 
   /**
    * Interactive Operations Limit. 2 Operations.This value is the same as OpsLimitDefault.
@@ -141,7 +141,7 @@ export class SecurePass {
    * Choosing a higher value such as MemLimitModerate, MemLimitSensitive or a custom value may improve security.
    * @readonly
    */
-  public static readonly OpsLimitInteractive: number = sodium.crypto_pwhash_OPSLIMIT_INTERACTIVE;
+  public static readonly OpsLimitInteractive: number = 2;
 
   /**
    * Moderate Operations Limit. 3 Operations.
@@ -150,7 +150,7 @@ export class SecurePass {
    * Using this options takes around 0.7 seconds to derrive a hash on a 2.8Ghz Core i7 CPU.
    * @readonly
    */
-  public static readonly OpsLimitModerate: number = sodium.crypto_pwhash_OPSLIMIT_MODERATE;
+  public static readonly OpsLimitModerate: number = 3;
 
   /**
    * Sensitive Operations Limit. 4 Operations.
@@ -158,19 +158,19 @@ export class SecurePass {
    * and non-interactive operations.
    * Using this option it takes around 3.5 seconds to derrive a hash on a 2.8Ghz Core i7 CPU.
    */
-  public static readonly OpsLimitSensitive: number = sodium.crypto_pwhash_OPSLIMIT_SENSITIVE;
+  public static readonly OpsLimitSensitive: number = 4;
 
   /**
    * The Minimum Allowed Operations Limit. 1 Operation.
    * @readonly
    */
-  public static readonly OpsLimitMinimum: number = sodium.crypto_pwhash_OPSLIMIT_MIN;
+  public static readonly OpsLimitMinimum: number = 1;
 
   /**
    * The Maximum Allowed Operations Limit. 4294967295 Operations.
    * @readonly
    */
-  public static readonly OpsLimitMaximum: number = sodium.crypto_pwhash_OPSLIMIT_MAX;
+  public static readonly OpsLimitMaximum: number = 4294967295;
 
   /**
    * Generates a random key, and then uses that key and the supplied message,

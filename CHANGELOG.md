@@ -8,6 +8,10 @@ All notable changes to this project will be documented in this file. This projec
 - Added get and set functions for MemLimit. `MemLimit()` and `MemLimit(newValue)`.
 - Added get and set functions for OpsLimit. `OpsLimit()` and `OpsLimit(newValue)`.
 
+### Changed
+
+- `static readonly` configuration default values are now set to their value manually. Previously they were just "re-exports" of sodium-native's constants.
+
 ### Removed
 
 - Removed `getMemLimit()` and `getOpsLimit()` functions, replaced with getters and setters as detailed above.
