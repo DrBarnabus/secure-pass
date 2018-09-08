@@ -1,5 +1,5 @@
 import sodium from 'sodium-native';
-import { GenerateOneTimeAuthResult, SecurePass, VerificationResult } from '..';
+import { SecurePass, VerificationResult } from '..';
 import { SecurePassError, SecurePassOptionsError } from '../error';
 
 describe('SecurePass - Constants', () => {
@@ -45,58 +45,58 @@ describe('SecurePass - Constants', () => {
 describe('SecurePass - Options', () => {
   test('Passing no configuration should create a new instance with the default options.', () => {
     const sp = new SecurePass();
-    expect(sp.getMemLimit()).toEqual(sodium.crypto_pwhash_MEMLIMIT_INTERACTIVE);
-    expect(sp.getOpsLimit()).toEqual(sodium.crypto_pwhash_OPSLIMIT_INTERACTIVE);
+    expect(sp.MemLimit).toEqual(sodium.crypto_pwhash_MEMLIMIT_INTERACTIVE);
+    expect(sp.OpsLimit).toEqual(sodium.crypto_pwhash_OPSLIMIT_INTERACTIVE);
   });
 
   test('Passing in an empty object should create a new instance with the default options.', () => {
     const sp = new SecurePass({});
-    expect(sp.getMemLimit()).toEqual(sodium.crypto_pwhash_MEMLIMIT_INTERACTIVE);
-    expect(sp.getOpsLimit()).toEqual(sodium.crypto_pwhash_OPSLIMIT_INTERACTIVE);
+    expect(sp.MemLimit).toEqual(sodium.crypto_pwhash_MEMLIMIT_INTERACTIVE);
+    expect(sp.OpsLimit).toEqual(sodium.crypto_pwhash_OPSLIMIT_INTERACTIVE);
   });
 
   test('A valid value for memLimit should be set correctly. And opsLimit should be set to the default value.', () => {
     const sp = new SecurePass({
       memLimit: 16384
     });
-    expect(sp.getMemLimit()).toEqual(16384);
-    expect(sp.getOpsLimit()).toEqual(sodium.crypto_pwhash_OPSLIMIT_INTERACTIVE);
+    expect(sp.MemLimit).toEqual(16384);
+    expect(sp.OpsLimit).toEqual(sodium.crypto_pwhash_OPSLIMIT_INTERACTIVE);
   });
 
   test('A valid value for opsLimit should be set correctly. And memLimit should be set to the default value.', () => {
     const sp = new SecurePass({
       opsLimit: 12
     });
-    expect(sp.getMemLimit()).toEqual(sodium.crypto_pwhash_MEMLIMIT_INTERACTIVE);
-    expect(sp.getOpsLimit()).toEqual(12);
+    expect(sp.MemLimit).toEqual(sodium.crypto_pwhash_MEMLIMIT_INTERACTIVE);
+    expect(sp.OpsLimit).toEqual(12);
   });
 
   test('A lower bounds value for memLimit should still be considered valid.', () => {
     const sp = new SecurePass({
       memLimit: SecurePass.MemLimitMinimum
     });
-    expect(sp.getMemLimit()).toEqual(SecurePass.MemLimitMinimum);
+    expect(sp.MemLimit).toEqual(SecurePass.MemLimitMinimum);
   });
 
   test('An upper bounds value for memLimit should still be considered valid.', () => {
     const sp = new SecurePass({
       memLimit: SecurePass.MemLimitMaximum
     });
-    expect(sp.getMemLimit()).toEqual(SecurePass.MemLimitMaximum);
+    expect(sp.MemLimit).toEqual(SecurePass.MemLimitMaximum);
   });
 
   test('A lower bounds value for opsLimit should still be considered valid.', () => {
     const sp = new SecurePass({
       opsLimit: SecurePass.OpsLimitMinimum
     });
-    expect(sp.getOpsLimit()).toEqual(SecurePass.OpsLimitMinimum);
+    expect(sp.OpsLimit).toEqual(SecurePass.OpsLimitMinimum);
   });
 
   test('An upper bounds value for opsLimit should still be considered valid.', () => {
     const sp = new SecurePass({
       opsLimit: SecurePass.OpsLimitMaximum
     });
-    expect(sp.getOpsLimit()).toEqual(SecurePass.OpsLimitMaximum);
+    expect(sp.OpsLimit).toEqual(SecurePass.OpsLimitMaximum);
   });
 
   test('An invalid value for memLimit should throw an error.', () => {
@@ -119,6 +119,62 @@ describe('SecurePass - Options', () => {
       expect(e).toBeDefined();
       expect(e instanceof SecurePassOptionsError).toBeTruthy();
     }
+  });
+
+  describe('get and set - MemLimit', () => {
+    test('MemLimit should return the currently configured Memory Limit.', () => {
+      const sp = new SecurePass({
+        memLimit: SecurePass.MemLimitSensitive
+      });
+
+      expect(sp.MemLimit).toEqual(SecurePass.MemLimitSensitive);
+    });
+
+    test('MemLimit should set the configured Memory Limit to the new limit.', () => {
+      const sp = new SecurePass();
+
+      sp.MemLimit = SecurePass.MemLimitModerate;
+
+      expect(sp.MemLimit).toEqual(SecurePass.MemLimitModerate);
+    });
+
+    test('MemLimit should throw an error if set with an invalid memory limit.', () => {
+      const sp = new SecurePass();
+
+      try {
+        sp.MemLimit = 1024;
+      } catch (e) {
+        expect(e instanceof SecurePassOptionsError).toBeTruthy();
+      }
+    });
+  });
+
+  describe('get and set - OpsLimit', () => {
+    test('OpsLimit should return the currently configured Memory Limit.', () => {
+      const sp = new SecurePass({
+        opsLimit: SecurePass.OpsLimitSensitive
+      });
+
+      expect(sp.OpsLimit).toEqual(SecurePass.OpsLimitSensitive);
+    });
+
+    test('OpsLimit should set the configured Memory Limit to the new limit.', () => {
+      const sp = new SecurePass();
+
+      sp.OpsLimit = SecurePass.OpsLimitModerate;
+
+      expect(sp.OpsLimit).toEqual(SecurePass.OpsLimitModerate);
+    });
+
+    test('OpsLimit should throw an error if set with an invalid memory limit.', () => {
+      const sp = new SecurePass();
+
+      try {
+        sp.OpsLimit = SecurePass.OpsLimitMaximum + 1;
+      } catch (e) {
+        expect(e instanceof SecurePassOptionsError).toBeTruthy();
+      }
+    });
   });
 });
 
@@ -262,6 +318,35 @@ describe('SecurePass - Functions', () => {
     });
   });
 
+  describe('hashPasswordSync', () => {
+    test('Should return a valid hash if given a valid password.', done => {
+      const sp = new SecurePass();
+
+      const password = Buffer.from('SecurePass');
+      const hash = sp.hashPasswordSync(password);
+
+      expect(hash.length).toEqual(SecurePass.HashBytes);
+      expect(sp.verifyHashSync(password, hash)).toEqual(VerificationResult.Valid);
+
+      done();
+    });
+
+    test('Should throw an error if given a blank password buffer.', done => {
+      const sp = new SecurePass();
+
+      const password = Buffer.from('');
+
+      try {
+        const hash = sp.hashPasswordSync(password);
+      } catch (e) {
+        expect(e).toBeDefined();
+        expect(e instanceof SecurePassError).toBeTruthy();
+      }
+
+      done();
+    });
+  });
+
   describe('async/promise verifyHash()', () => {
     test('Should correctly verify a valid hashed password.', async () => {
       const sp = new SecurePass();
@@ -296,14 +381,14 @@ describe('SecurePass - Functions', () => {
         opsLimit: SecurePass.OpsLimitDefault + 1
       });
 
-      const rehashValid = await bsp.verifyHash(userPassword, weakHash);
+      const rehashValid = bsp.verifyHashSync(userPassword, weakHash);
       expect(rehashValid).toEqual(VerificationResult.ValidNeedsRehash);
 
       const betterHash = await bsp.hashPassword(userPassword);
-      const betterValid = await bsp.verifyHash(userPassword, betterHash);
+      const betterValid = bsp.verifyHashSync(userPassword, betterHash);
       expect(betterValid).toEqual(VerificationResult.Valid);
 
-      const betterInvalid = await bsp.verifyHash(wrongPassword, betterHash);
+      const betterInvalid = bsp.verifyHashSync(wrongPassword, betterHash);
       expect(betterInvalid).toEqual(VerificationResult.Invalid);
     });
 
@@ -471,6 +556,89 @@ describe('SecurePass - Functions', () => {
 
         done();
       });
+    });
+  });
+
+  describe('verifyHashSync()', () => {
+    test('Should correctly verify a valid hashed password.', () => {
+      const sp = new SecurePass();
+
+      const password = Buffer.from('SecurePass');
+      const hash = sp.hashPasswordSync(password);
+
+      const result = sp.verifyHashSync(password, hash);
+
+      expect(result).toBeDefined();
+      expect(result).toEqual(VerificationResult.Valid);
+    });
+
+    test('Should correctly rehash passwords.', () => {
+      const wsp = new SecurePass({
+        memLimit: SecurePass.MemLimitDefault,
+        opsLimit: SecurePass.OpsLimitDefault
+      });
+
+      const userPassword = Buffer.from('SecurePass');
+      const wrongPassword = Buffer.from('SecurePass2');
+
+      const weakHash = wsp.hashPasswordSync(userPassword);
+      const weakValid = wsp.verifyHashSync(userPassword, weakHash);
+      expect(weakValid).toEqual(VerificationResult.Valid);
+
+      const weakInvalid = wsp.verifyHashSync(wrongPassword, weakHash);
+      expect(weakInvalid).toEqual(VerificationResult.Invalid);
+
+      const bsp = new SecurePass({
+        memLimit: SecurePass.MemLimitDefault + 1024,
+        opsLimit: SecurePass.OpsLimitDefault + 1
+      });
+
+      const rehashValid = bsp.verifyHashSync(userPassword, weakHash);
+      expect(rehashValid).toEqual(VerificationResult.ValidNeedsRehash);
+
+      const betterHash = bsp.hashPasswordSync(userPassword);
+      const betterValid = bsp.verifyHashSync(userPassword, betterHash);
+      expect(betterValid).toEqual(VerificationResult.Valid);
+
+      const betterInvalid = bsp.verifyHashSync(wrongPassword, betterHash);
+      expect(betterInvalid).toEqual(VerificationResult.Invalid);
+    });
+
+    test('Should return an error if given a blank password buffer.', () => {
+      const sp = new SecurePass();
+
+      try {
+        const password = Buffer.from('');
+        const hash = Buffer.alloc(SecurePass.HashBytes);
+        const result = sp.verifyHashSync(password, hash);
+      } catch (e) {
+        expect(e).toBeDefined();
+        expect(e instanceof SecurePassError).toBeTruthy();
+      }
+    });
+
+    test('Should return an error if given a blank hash buffer.', () => {
+      const sp = new SecurePass();
+
+      try {
+        const password = Buffer.from('SecurePass');
+        const hash = Buffer.from('');
+        const result = sp.verifyHashSync(password, hash);
+      } catch (e) {
+        expect(e).toBeDefined();
+        expect(e instanceof SecurePassError).toBeTruthy();
+      }
+    });
+
+    test('Should return InvalidOrUnrecognized if given an invalid hash buffer.', () => {
+      const sp = new SecurePass();
+
+      const password = Buffer.from('SecurePass');
+      const hash = Buffer.alloc(SecurePass.HashBytes, 0);
+
+      const result = sp.verifyHashSync(password, hash);
+
+      expect(result).toEqual(VerificationResult.InvalidOrUnrecognized);
     });
   });
 });
