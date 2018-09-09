@@ -9,7 +9,7 @@
     "pretest": "yarn lint",
     "test": "jest",
     "build": "tsc",
-    "prepublishonly": "yarn build"
+    "prepare": "yarn build"
   },
   "dependencies": {
     "sodium-native": "^2.2.1"
@@ -62,6 +62,16 @@
     "reset",
     "onetime",
     "token",
-    "typescript"
+    "typescript",
+    "argon2 password",
+    "secure password",
+    "argon2id password",
+    "password hasing",
+    "password hasher",
+    "password security",
+    "one time authentication",
+    "one time authentication code",
+    "one time key",
+    "cryptography"
   ]
 }
