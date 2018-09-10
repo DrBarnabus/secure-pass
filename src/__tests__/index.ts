@@ -2,38 +2,24 @@ import sodium from 'sodium-native';
 import { SecurePass, VerificationResult } from '..';
 import { SecurePassError, SecurePassOptionsError } from '../error';
 
-describe('SecurePass - Constants', () => {
-  test('PasswordBytes* Constants should be defined.', () => {
-    expect(SecurePass.PasswordBytesMax).toBeDefined();
+describe('SecurePass', () => {
+  test('static readonly constants should be defined.', () => {
     expect(SecurePass.PasswordBytesMin).toBeDefined();
-  });
-
-  test('HashBytes Constant should be defined.', () => {
+    expect(SecurePass.PasswordBytesMax).toBeDefined();
     expect(SecurePass.HashBytes).toBeDefined();
-  });
-
-  test('SaltBytes Constant should be defined', () => {
     expect(SecurePass.SaltBytes).toBeDefined();
-  });
-
-  test('MacBytes Constant should be defined.', () => {
     expect(SecurePass.MacBytes).toBeDefined();
-  });
-
-  test('KeyBytes Constant should be defined.', () => {
     expect(SecurePass.KeyBytes).toBeDefined();
-  });
 
-  test('MemLimit* Constants should be defined.', () => {
+    // Memory Limit Constants
     expect(SecurePass.MemLimitDefault).toBeDefined();
     expect(SecurePass.MemLimitInteractive).toBeDefined();
     expect(SecurePass.MemLimitModerate).toBeDefined();
     expect(SecurePass.MemLimitSensitive).toBeDefined();
     expect(SecurePass.MemLimitMinimum).toBeDefined();
     expect(SecurePass.MemLimitMaximum).toBeDefined();
-  });
 
-  test('OpsLimit* Constants should be defined.', () => {
+    // Operations Limit Constants
     expect(SecurePass.OpsLimitDefault).toBeDefined();
     expect(SecurePass.OpsLimitInteractive).toBeDefined();
     expect(SecurePass.OpsLimitModerate).toBeDefined();
@@ -42,171 +28,175 @@ describe('SecurePass - Constants', () => {
     expect(SecurePass.OpsLimitMaximum).toBeDefined();
   });
 
-  test('VerificationResult.* Enum Constants should be defined.', () => {
-    expect(VerificationResult.InvalidOrUnrecognized).toEqual(0);
-    expect(VerificationResult.Invalid).toEqual(1);
-    expect(VerificationResult.Valid).toEqual(2);
-    expect(VerificationResult.ValidNeedsRehash).toEqual(3);
-  });
-});
+  test('static readonly constants should have the correct values.', () => {
+    expect(SecurePass.PasswordBytesMin).toEqual(1);
+    expect(SecurePass.PasswordBytesMax).toEqual(2147483647);
+    expect(SecurePass.HashBytes).toEqual(128);
+    expect(SecurePass.SaltBytes).toEqual(16);
+    expect(SecurePass.MacBytes).toEqual(16);
+    expect(SecurePass.KeyBytes).toEqual(32);
 
-describe('SecurePass - Options', () => {
-  test('Passing no configuration should create a new instance with the default options.', () => {
-    const sp = new SecurePass();
-    expect(sp.MemLimit).toEqual(sodium.crypto_pwhash_MEMLIMIT_INTERACTIVE);
-    expect(sp.OpsLimit).toEqual(sodium.crypto_pwhash_OPSLIMIT_INTERACTIVE);
+    // Memory Limit Constants
+    expect(SecurePass.MemLimitDefault).toEqual(67108864);
+    expect(SecurePass.MemLimitInteractive).toEqual(67108864);
+    expect(SecurePass.MemLimitModerate).toEqual(268435456);
+    expect(SecurePass.MemLimitSensitive).toEqual(1073741824);
+    expect(SecurePass.MemLimitMinimum).toEqual(8192);
+    expect(SecurePass.MemLimitMaximum).toEqual(4398046510080);
+
+    // Operations Limit Constants
+    expect(SecurePass.OpsLimitDefault).toEqual(2);
+    expect(SecurePass.OpsLimitInteractive).toEqual(2);
+    expect(SecurePass.OpsLimitModerate).toEqual(3);
+    expect(SecurePass.OpsLimitSensitive).toEqual(4);
+    expect(SecurePass.OpsLimitMinimum).toEqual(1);
+    expect(SecurePass.OpsLimitMaximum).toEqual(4294967295);
   });
 
-  test('Passing in an empty object should create a new instance with the default options.', () => {
-    const sp = new SecurePass({});
-    expect(sp.MemLimit).toEqual(sodium.crypto_pwhash_MEMLIMIT_INTERACTIVE);
-    expect(sp.OpsLimit).toEqual(sodium.crypto_pwhash_OPSLIMIT_INTERACTIVE);
-  });
+  describe('SecurePass MemLimit and OpsLimit Options', () => {
+    test('Passing no configuration to SecurePass, should create a new instance with the default values', () => {
+      const sp1 = new SecurePass();
+      expect(sp1.MemLimit).toEqual(SecurePass.MemLimitDefault);
+      expect(sp1.OpsLimit).toEqual(SecurePass.OpsLimitDefault);
 
-  test('A valid value for memLimit should be set correctly. And opsLimit should be set to the default value.', () => {
-    const sp = new SecurePass({
-      memLimit: 16384
+      const sp2 = new SecurePass({});
+      expect(sp2.MemLimit).toEqual(SecurePass.MemLimitDefault);
+      expect(sp2.OpsLimit).toEqual(SecurePass.OpsLimitDefault);
     });
-    expect(sp.MemLimit).toEqual(16384);
-    expect(sp.OpsLimit).toEqual(sodium.crypto_pwhash_OPSLIMIT_INTERACTIVE);
-  });
 
-  test('A valid value for opsLimit should be set correctly. And memLimit should be set to the default value.', () => {
-    const sp = new SecurePass({
-      opsLimit: 12
-    });
-    expect(sp.MemLimit).toEqual(sodium.crypto_pwhash_MEMLIMIT_INTERACTIVE);
-    expect(sp.OpsLimit).toEqual(12);
-  });
-
-  test('A lower bounds value for memLimit should still be considered valid.', () => {
-    const sp = new SecurePass({
-      memLimit: SecurePass.MemLimitMinimum
-    });
-    expect(sp.MemLimit).toEqual(SecurePass.MemLimitMinimum);
-  });
-
-  test('An upper bounds value for memLimit should still be considered valid.', () => {
-    const sp = new SecurePass({
-      memLimit: SecurePass.MemLimitMaximum
-    });
-    expect(sp.MemLimit).toEqual(SecurePass.MemLimitMaximum);
-  });
-
-  test('A lower bounds value for opsLimit should still be considered valid.', () => {
-    const sp = new SecurePass({
-      opsLimit: SecurePass.OpsLimitMinimum
-    });
-    expect(sp.OpsLimit).toEqual(SecurePass.OpsLimitMinimum);
-  });
-
-  test('An upper bounds value for opsLimit should still be considered valid.', () => {
-    const sp = new SecurePass({
-      opsLimit: SecurePass.OpsLimitMaximum
-    });
-    expect(sp.OpsLimit).toEqual(SecurePass.OpsLimitMaximum);
-  });
-
-  test('An invalid value for memLimit should throw an error.', () => {
-    try {
+    test('Passing no value for memLimit, should result in the default value being set.', () => {
       const sp = new SecurePass({
-        memLimit: 1
+        opsLimit: 6
       });
-    } catch (e) {
-      expect(e).toBeDefined();
-      expect(e instanceof SecurePassOptionsError).toBeTruthy();
-    }
-  });
-
-  test('An invalid value for opsLimit should throw an error.', () => {
-    try {
-      const sp = new SecurePass({
-        opsLimit: SecurePass.OpsLimitMaximum + 1
-      });
-    } catch (e) {
-      expect(e).toBeDefined();
-      expect(e instanceof SecurePassOptionsError).toBeTruthy();
-    }
-  });
-
-  describe('get and set - MemLimit', () => {
-    test('MemLimit should return the currently configured Memory Limit.', () => {
-      const sp = new SecurePass({
-        memLimit: SecurePass.MemLimitSensitive
-      });
-
-      expect(sp.MemLimit).toEqual(SecurePass.MemLimitSensitive);
+      expect(sp.MemLimit).toEqual(SecurePass.MemLimitDefault);
     });
 
-    test('MemLimit should set the configured Memory Limit to the new limit.', () => {
-      const sp = new SecurePass();
-
-      sp.MemLimit = SecurePass.MemLimitModerate;
-
-      expect(sp.MemLimit).toEqual(SecurePass.MemLimitModerate);
+    test('Passing no value for opsLimit, should result in the default value being set.', () => {
+      const sp = new SecurePass({
+        memLimit: 16 * 1024
+      });
+      expect(sp.OpsLimit).toEqual(SecurePass.OpsLimitDefault);
     });
 
-    test('MemLimit should throw an error if set with an invalid memory limit.', () => {
-      const sp = new SecurePass();
+    // Test Valid Values for MemLimit, Including Upper and Lower Bounds.
+    describe.each([SecurePass.MemLimitInteractive, SecurePass.MemLimitMinimum, SecurePass.MemLimitMaximum])(
+      'Valid and Edge Case values for MemLimit.',
+      m => {
+        test(`${m} should be a valid value for MemLimit, when passed in the constructor.`, () => {
+          const sp = new SecurePass({
+            memLimit: m
+          });
+          expect(sp.MemLimit).toEqual(m);
+        });
 
-      try {
-        sp.MemLimit = 1024;
-      } catch (e) {
-        expect(e instanceof SecurePassOptionsError).toBeTruthy();
+        test(`${m} should be a valid value for MemLimit, when set with the accessor.`, () => {
+          const sp = new SecurePass();
+          sp.MemLimit = m;
+          expect(sp.MemLimit).toEqual(m);
+        });
       }
-    });
-  });
+    );
 
-  describe('get and set - OpsLimit', () => {
-    test('OpsLimit should return the currently configured Memory Limit.', () => {
-      const sp = new SecurePass({
-        opsLimit: SecurePass.OpsLimitSensitive
-      });
+    // Test Valid Values for OpsLimit, Including Upper and Lower Bounds.
+    describe.each([SecurePass.OpsLimitInteractive, SecurePass.OpsLimitMinimum, SecurePass.OpsLimitMaximum])(
+      'Valid and Edge Case values for OpsLimit.',
+      o => {
+        test(`${o} should be a valid value for OpsLimit, when passed in the constructor.`, () => {
+          const sp = new SecurePass({
+            opsLimit: o
+          });
+          expect(sp.OpsLimit).toEqual(o);
+        });
 
-      expect(sp.OpsLimit).toEqual(SecurePass.OpsLimitSensitive);
-    });
-
-    test('OpsLimit should set the configured Memory Limit to the new limit.', () => {
-      const sp = new SecurePass();
-
-      sp.OpsLimit = SecurePass.OpsLimitModerate;
-
-      expect(sp.OpsLimit).toEqual(SecurePass.OpsLimitModerate);
-    });
-
-    test('OpsLimit should throw an error if set with an invalid memory limit.', () => {
-      const sp = new SecurePass();
-
-      try {
-        sp.OpsLimit = SecurePass.OpsLimitMaximum + 1;
-      } catch (e) {
-        expect(e instanceof SecurePassOptionsError).toBeTruthy();
+        test(`${o} should be a valid value for OpsLimit, when set with the accessor.`, () => {
+          const sp = new SecurePass();
+          sp.OpsLimit = o;
+          expect(sp.OpsLimit).toEqual(o);
+        });
       }
-    });
-  });
-});
+    );
 
-describe('SecurePass - Static Functions', () => {
+    // Test Invalid Values for MemLimit.
+    describe.each([SecurePass.MemLimitMinimum - 1, SecurePass.MemLimitMaximum + 1])(
+      'Invalid Values for MemLimit.',
+      m => {
+        test(`${m} should be an invalid value for MemLimit, when passed in the constructor.`, () => {
+          try {
+            const sp = new SecurePass({
+              memLimit: m
+            });
+
+            // Makes sure that the error is thrown.
+            expect(true).toBeFalsy();
+          } catch (e) {
+            expect(e instanceof SecurePassOptionsError).toBeTruthy();
+          }
+        });
+
+        test(`${m} should be an invalid value for MemLimit, when set with the accessor.`, () => {
+          try {
+            const sp = new SecurePass();
+            sp.MemLimit = m;
+
+            // Makes sure that the error is thrown.
+            expect(true).toBeFalsy();
+          } catch (e) {
+            expect(e instanceof SecurePassOptionsError).toBeTruthy();
+          }
+        });
+      }
+    );
+
+    // Test Invalid Values for OpsLimit.
+    describe.each([SecurePass.OpsLimitMinimum - 1, SecurePass.OpsLimitMaximum + 1])(
+      'Invalid Values for OpsLimit.',
+      o => {
+        test(`${o} should be an invalid value for OpsLimit, when passed in the constructor.`, () => {
+          try {
+            const sp = new SecurePass({
+              opsLimit: o
+            });
+
+            // Makes sure that the error is thrown.
+            expect(true).toBeFalsy();
+          } catch (e) {
+            expect(e instanceof SecurePassOptionsError).toBeTruthy();
+          }
+        });
+
+        test(`${o} should be an invalid value for OpsLimit, when set with the accessor.`, () => {
+          try {
+            const sp = new SecurePass();
+            sp.OpsLimit = o;
+
+            // Makes sure that the error is thrown.
+            expect(true).toBeFalsy();
+          } catch (e) {
+            expect(e instanceof SecurePassOptionsError).toBeTruthy();
+          }
+        });
+      }
+    );
+  });
+
   describe('generateOneTimeAuth()', () => {
-    test('Should return a mac, key and the original message.', () => {
+    test('Should return a mac, random key and the original message.', () => {
       const message = Buffer.from('ExampleMessage');
       const result = SecurePass.generateOneTimeAuth(message);
-      expect(result.mac).toBeDefined();
-      expect(result.mac.length).toEqual(sodium.crypto_onetimeauth_BYTES);
-      expect(result.message).toBeDefined();
+
+      expect(result.mac.length).toEqual(SecurePass.MacBytes);
       expect(result.message.compare(message)).toEqual(0);
-      expect(result.key).toBeDefined();
-      expect(result.key.length).toEqual(sodium.crypto_onetimeauth_KEYBYTES);
+      expect(result.key.length).toEqual(SecurePass.KeyBytes);
     });
   });
 
   describe('verifyOneTimeAuth()', () => {
-    test('Should return true if the message, mac and key match.', () => {
+    test('Should return true if the message, mac and random key match.', () => {
       const message = Buffer.from('ExampleMessage');
       const ota = SecurePass.generateOneTimeAuth(message);
 
       const result = SecurePass.verifyOneTimeAuth(ota.mac, message, ota.key);
-      expect(result).toBeDefined();
+
       expect(result).toBeTruthy();
     });
 
@@ -214,9 +204,9 @@ describe('SecurePass - Static Functions', () => {
       const message = Buffer.from('ExampleMessage');
       const ota = SecurePass.generateOneTimeAuth(message);
 
-      const badMessage = Buffer.from('ExampleBad');
+      const badMessage = Buffer.from('ExampleMessageBad');
       const result = SecurePass.verifyOneTimeAuth(ota.mac, badMessage, ota.key);
-      expect(result).toBeDefined();
+
       expect(result).toBeFalsy();
     });
 
@@ -224,135 +214,199 @@ describe('SecurePass - Static Functions', () => {
       const message = Buffer.from('ExampleMessage');
       const ota = SecurePass.generateOneTimeAuth(message);
 
-      const badMac = Buffer.alloc(sodium.crypto_onetimeauth_BYTES);
+      const badMac = Buffer.alloc(SecurePass.MacBytes);
       const result = SecurePass.verifyOneTimeAuth(badMac, message, ota.key);
-      expect(result).toBeDefined();
+
       expect(result).toBeFalsy();
     });
 
-    test('Should return false if the key does not match the message and mac.', () => {
+    test('Should return false if the random key does not match the message and mac.', () => {
       const message = Buffer.from('ExampleMessage');
       const ota = SecurePass.generateOneTimeAuth(message);
 
-      const badKey = Buffer.alloc(sodium.crypto_onetimeauth_KEYBYTES);
+      const badKey = Buffer.alloc(SecurePass.KeyBytes);
       const result = SecurePass.verifyOneTimeAuth(ota.mac, message, badKey);
-      expect(result).toBeDefined();
+
       expect(result).toBeFalsy();
     });
   });
 
   describe('generateOneTimeAuthCode()', () => {
-    test('Should return a code string and a key buffer.', () => {
+    test('Should return a valid code and a key buffer.', () => {
       const message = Buffer.from('ExampleMessage');
-      const result = SecurePass.generateOneTimeAuthCode(message);
-      expect(typeof result.code).toEqual('string');
-      expect(result.code.length > 0).toBeTruthy();
-      expect(result.code.indexOf('~')).toBeTruthy();
-      expect(result.key instanceof Buffer).toBeTruthy();
-      expect(result.key.length).toEqual(sodium.crypto_onetimeauth_KEYBYTES);
+      const otac = SecurePass.generateOneTimeAuthCode(message);
+
+      expect(otac.code.indexOf('~')).not.toEqual(-1);
+      expect(otac.key.length).toEqual(SecurePass.KeyBytes);
     });
   });
 
   describe('verifyOneTimeAuthCode()', () => {
-    test('Should return true when used with a valid code and key.', () => {
+    test('Should return true when called with a valid code and key.', () => {
       const message = Buffer.from('ExampleMessage');
-      const ota = SecurePass.generateOneTimeAuthCode(message);
+      const otac = SecurePass.generateOneTimeAuthCode(message);
 
-      const result = SecurePass.verifyOneTimeAuthCode(ota.code, ota.key);
+      const result = SecurePass.verifyOneTimeAuthCode(otac.code, otac.key);
       expect(result).toBeTruthy();
     });
 
-    test('Should return false when used with an invalid key.', () => {
+    test('Should return false if called with an invalid key.', () => {
       const message = Buffer.from('ExampleMessage');
-      const ota = SecurePass.generateOneTimeAuthCode(message);
+      const otac = SecurePass.generateOneTimeAuthCode(message);
 
-      const badKey = Buffer.alloc(sodium.crypto_onetimeauth_KEYBYTES);
-      const result = SecurePass.verifyOneTimeAuthCode(ota.code, badKey);
+      const badKey = Buffer.alloc(SecurePass.KeyBytes);
+      const result = SecurePass.verifyOneTimeAuthCode(otac.code, badKey);
       expect(result).toBeFalsy();
     });
   });
-});
 
-describe('SecurePass - Functions', () => {
   describe('async/promise hashPassword()', () => {
-    test('Should return a string if given a valid password buffer.', async () => {
+    test('Should return a hash if given a valid password.', async done => {
       const sp = new SecurePass();
 
       const password = Buffer.from('SecurePass');
       const hash = await sp.hashPassword(password);
 
       expect(hash.length).toEqual(SecurePass.HashBytes);
-      expect(hash.toString().length > 0).toBeTruthy();
       expect(hash.indexOf('$argon2id')).toEqual(0);
+
+      done();
     });
 
-    test('Should return an error if given a blank password buffer.', async () => {
-      const sp = new SecurePass();
-
-      try {
-        const password = Buffer.from('');
+    test.each([SecurePass.PasswordBytesMin, SecurePass.PasswordBytesMax])(
+      'Should return a hash if given a password buffer of length %1.',
+      async (p, done) => {
+        const sp = new SecurePass();
+        const password = Buffer.alloc(p, 'f');
         const hash = await sp.hashPassword(password);
-      } catch (e) {
-        expect(e).toBeDefined();
-        expect(e instanceof SecurePassError).toBeTruthy();
+
+        expect(hash.length).toEqual(SecurePass.HashBytes);
+        expect(hash.indexOf('$argon2id')).toEqual(0);
+
+        done();
       }
-    });
+    );
+
+    test.each([SecurePass.PasswordBytesMin - 1, SecurePass.PasswordBytesMax + 1])(
+      'Should throw an error if given a password buffer of length %i.',
+      async (p, done) => {
+        try {
+          const sp = new SecurePass();
+          const password = Buffer.alloc(p, 'f');
+          const hash = await sp.hashPassword(password);
+
+          expect(false).toBeTruthy();
+          done();
+        } catch (e) {
+          expect(e).toBeDefined();
+          done();
+        }
+      }
+    );
   });
 
   describe('callback hashPassword()', () => {
-    test('Should return a string if given a valid password buffer.', done => {
+    test('Should return a hash if given a valid password.', done => {
       const sp = new SecurePass();
 
       const password = Buffer.from('SecurePass');
       sp.hashPassword(password, (err: SecurePassError | null, hash?: Buffer) => {
-        expect(err).toBeNull();
-        expect(hash).toBeDefined();
+        if (err || hash == undefined) {
+          expect(false).toBeTruthy();
+          return;
+        }
+
+        expect(hash.length).toEqual(SecurePass.HashBytes);
+        expect(hash.indexOf('$argon2id')).toEqual(0);
 
         done();
       });
     });
 
-    test('Should return an error if given a blank password buffer.', done => {
-      const sp = new SecurePass();
+    test.each([SecurePass.PasswordBytesMin, SecurePass.PasswordBytesMax])(
+      'Should return a hash if given a password buffer of length %1.',
+      async (p, done) => {
+        const sp = new SecurePass();
+        const password = Buffer.alloc(p, 'f');
+        sp.hashPassword(password, (err: SecurePassError | null, hash?: Buffer) => {
+          if (err || hash == undefined) {
+            expect(false).toBeTruthy();
+            return;
+          }
 
-      const password = Buffer.from('');
-      sp.hashPassword(password, (err: SecurePassError | null, hash?: Buffer) => {
-        expect(err).toBeDefined();
-        expect(err instanceof SecurePassError).toBeTruthy();
-        expect(hash).toBeUndefined();
+          expect(hash.length).toEqual(SecurePass.HashBytes);
+          expect(hash.indexOf('$argon2id')).toEqual(0);
 
-        done();
-      });
-    });
+          done();
+        });
+      }
+    );
+
+    test.each([SecurePass.PasswordBytesMin - 1, SecurePass.PasswordBytesMax + 1])(
+      'Should throw an error if given a password buffer of length %i.',
+      async (p, done) => {
+        const sp = new SecurePass();
+
+        try {
+          const password = Buffer.alloc(p, 'f');
+
+          sp.hashPassword(password, (err: SecurePassError | null, hash?: Buffer) => {
+            expect(err instanceof SecurePassError).toBeTruthy();
+            expect(hash).toBeUndefined();
+
+            done();
+          });
+        } catch (e) {
+          expect(e).toBeDefined();
+          done();
+        }
+      }
+    );
   });
 
-  describe('hashPasswordSync', () => {
-    test('Should return a valid hash if given a valid password.', done => {
+  describe('hashPasswordSync()', () => {
+    test('Should return a hash if given a valid password.', done => {
       const sp = new SecurePass();
 
       const password = Buffer.from('SecurePass');
       const hash = sp.hashPasswordSync(password);
 
       expect(hash.length).toEqual(SecurePass.HashBytes);
-      expect(sp.verifyHashSync(password, hash)).toEqual(VerificationResult.Valid);
+      expect(hash.indexOf('$argon2id')).toEqual(0);
 
       done();
     });
 
-    test('Should throw an error if given a blank password buffer.', done => {
-      const sp = new SecurePass();
-
-      const password = Buffer.from('');
-
-      try {
+    test.each([SecurePass.PasswordBytesMin, SecurePass.PasswordBytesMax])(
+      'Should return a hash if given a password buffer of length %1.',
+      (p, done) => {
+        const sp = new SecurePass();
+        const password = Buffer.alloc(p, 'f');
         const hash = sp.hashPasswordSync(password);
-      } catch (e) {
-        expect(e).toBeDefined();
-        expect(e instanceof SecurePassError).toBeTruthy();
-      }
 
-      done();
-    });
+        expect(hash.length).toEqual(SecurePass.HashBytes);
+        expect(hash.indexOf('$argon2id')).toEqual(0);
+
+        done();
+      }
+    );
+
+    test.each([SecurePass.PasswordBytesMin - 1, SecurePass.PasswordBytesMax + 1])(
+      'Should throw an error if given a password buffer of length %i.',
+      (p, done) => {
+        try {
+          const sp = new SecurePass();
+          const password = Buffer.alloc(p, 'f');
+          const hash = sp.hashPasswordSync(password);
+
+          expect(false).toBeTruthy();
+          done();
+        } catch (e) {
+          expect(e).toBeDefined();
+          done();
+        }
+      }
+    );
   });
 
   describe('async/promise verifyHash()', () => {
