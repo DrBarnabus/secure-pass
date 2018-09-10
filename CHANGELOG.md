@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.2] - 2018-09-10
+### Added
+
+- Added convenience functions to test if a VerificationResult is a specific type. These are; `isInvalidOrUnrecognized()`, `isInvalid()`, `isValid()` and `isValidNeedsRehash()`. These functions will return true if the enumeration value matches the tested value.
+
 ## [0.2.1] - 2018-09-09
 ### Removed
 
@@ -8,6 +13,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ## [0.2.0] - 2018-09-08
 ### Added
+
 - Added JSDoc comments to all functions and important objects. This was then used with the TypeDoc module to generate a documentation site for the package.
 - Added synchronous versions of hash and verify. `hashPasswordSync()` and `verifyHashSync()`.
 - Added get and set functions for MemLimit. `MemLimit()` and `MemLimit(newValue)`.

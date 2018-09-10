@@ -53,6 +53,51 @@ describe('SecurePass', () => {
     expect(SecurePass.OpsLimitMaximum).toEqual(4294967295);
   });
 
+  describe('VerificationResult', () => {
+    test('VerificationResult enumeration has the right values.', () => {
+      expect(VerificationResult.InvalidOrUnrecognized).toEqual(0);
+      expect(VerificationResult.Invalid).toEqual(1);
+      expect(VerificationResult.Valid).toEqual(2);
+      expect(VerificationResult.ValidNeedsRehash).toEqual(3);
+    });
+
+    test.each([
+      [VerificationResult.InvalidOrUnrecognized, true],
+      [VerificationResult.Invalid, false],
+      [VerificationResult.Valid, false],
+      [VerificationResult.ValidNeedsRehash, false]
+    ])('isInvalidOrUnrecognized should return the correct result when called with %i.', (vr, b) => {
+      expect(SecurePass.isInvalidOrUnrecognized(vr)).toEqual(b);
+    });
+
+    test.each([
+      [VerificationResult.InvalidOrUnrecognized, false],
+      [VerificationResult.Invalid, true],
+      [VerificationResult.Valid, false],
+      [VerificationResult.ValidNeedsRehash, false]
+    ])('isInvalid should return the correct result when called with %i.', (vr, b) => {
+      expect(SecurePass.isInvalid(vr)).toEqual(b);
+    });
+
+    test.each([
+      [VerificationResult.InvalidOrUnrecognized, false],
+      [VerificationResult.Invalid, false],
+      [VerificationResult.Valid, true],
+      [VerificationResult.ValidNeedsRehash, false]
+    ])('isValid should return the correct result when called with %i.', (vr, b) => {
+      expect(SecurePass.isValid(vr)).toEqual(b);
+    });
+
+    test.each([
+      [VerificationResult.InvalidOrUnrecognized, false],
+      [VerificationResult.Invalid, false],
+      [VerificationResult.Valid, false],
+      [VerificationResult.ValidNeedsRehash, true]
+    ])('isValidNeedsRehash should return the correct result when called with %i.', (vr, b) => {
+      expect(SecurePass.isValidNeedsRehash(vr)).toEqual(b);
+    });
+  });
+
   describe('SecurePass MemLimit and OpsLimit Options', () => {
     test('Passing no configuration to SecurePass, should create a new instance with the default values', () => {
       const sp1 = new SecurePass();

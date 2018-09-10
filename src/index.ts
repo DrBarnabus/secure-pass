@@ -238,6 +238,38 @@ export class SecurePass {
   }
 
   /**
+   * Tests a VerificationResult enumeration and returns true if the value is InvalidOrUnrecognized.
+   * @param vr - The VerificationResult to Test.
+   */
+  public static isInvalidOrUnrecognized(vr: VerificationResult): boolean {
+    return vr == VerificationResult.InvalidOrUnrecognized;
+  }
+
+  /**
+   * Tests a VerificationResult enumeration and returns true if the value is Invalid.
+   * @param vr - The VerificationResult to Test.
+   */
+  public static isInvalid(vr: VerificationResult): boolean {
+    return vr == VerificationResult.Invalid;
+  }
+
+  /**
+   * Tests a VerificationResult enumeration and returns true if the value is Valid.
+   * @param vr - The VerificationResult to Test.
+   */
+  public static isValid(vr: VerificationResult): boolean {
+    return vr == VerificationResult.Valid;
+  }
+
+  /**
+   * Tests a VerificationResult enumeration and returns true if the value is ValidNeedsRehash.
+   * @param vr - The VerificationResult to Test.
+   */
+  public static isValidNeedsRehash(vr: VerificationResult): boolean {
+    return vr == VerificationResult.ValidNeedsRehash;
+  }
+
+  /**
    * Configured memory limit for Argon2ID.
    */
   private memLimit: number;
