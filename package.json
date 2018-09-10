@@ -8,6 +8,7 @@
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
     "pretest": "yarn lint",
     "test": "jest",
+    "test:ci": "jest --maxWorkers 4",
     "build": "tsc",
     "prepare": "yarn build"
   },
