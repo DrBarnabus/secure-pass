@@ -70,7 +70,7 @@ export class SecurePass {
    * Maxium Length for the Password input buffer.
    * @readonly
    */
-  public static readonly PasswordBytesMax: number = 4294967295;
+  public static readonly PasswordBytesMax: number = 2147483647;
 
   /**
    * Length of the Password Hash output buffer.
@@ -358,7 +358,7 @@ export class SecurePass {
    * @param password - The password to be hashed.
    */
   public hashPasswordSync(password: Buffer): Buffer {
-    if (!(password.length >= SecurePass.PasswordBytesMin && password.length < SecurePass.PasswordBytesMax)) {
+    if (!(password.length >= SecurePass.PasswordBytesMin && password.length <= SecurePass.PasswordBytesMax)) {
       throw new SecurePassError(
         `Length of Password Buffer must be between ${SecurePass.PasswordBytesMin} and ${SecurePass.PasswordBytesMax}`
       );
@@ -393,7 +393,7 @@ export class SecurePass {
    * @param hash - The hash to be verified against.
    */
   public verifyHashSync(password: Buffer, hash: Buffer): VerificationResult {
-    if (!(password.length >= SecurePass.PasswordBytesMin && password.length < SecurePass.PasswordBytesMax)) {
+    if (!(password.length >= SecurePass.PasswordBytesMin && password.length <= SecurePass.PasswordBytesMax)) {
       throw new SecurePassError(
         `Length of Password Buffer must be between ${SecurePass.PasswordBytesMin} and ${SecurePass.PasswordBytesMax}`
       );
@@ -420,7 +420,7 @@ export class SecurePass {
 
   private async hashPasswordAsync(password: Buffer): Promise<Buffer> {
     return new Promise<Buffer>((resolve, reject) => {
-      if (!(password.length >= SecurePass.PasswordBytesMin && password.length < SecurePass.PasswordBytesMax)) {
+      if (!(password.length >= SecurePass.PasswordBytesMin && password.length <= SecurePass.PasswordBytesMax)) {
         reject(
           new SecurePassError(
             `Length of Password Buffer must be between ${SecurePass.PasswordBytesMin} and ${
@@ -444,7 +444,7 @@ export class SecurePass {
 
   private async verifyHashAsync(password: Buffer, hash: Buffer): Promise<VerificationResult> {
     return new Promise<VerificationResult>((resolve, reject) => {
-      if (!(password.length >= SecurePass.PasswordBytesMin && password.length < SecurePass.PasswordBytesMax)) {
+      if (!(password.length >= SecurePass.PasswordBytesMin && password.length <= SecurePass.PasswordBytesMax)) {
         reject(
           new SecurePassError(
             `Length of Password Buffer must be between ${SecurePass.PasswordBytesMin} and ${
