@@ -125,6 +125,7 @@ export class SecurePass {
    * This memory limit, combined with OpsLimitSensitive, is recommended for highly sensitive data
    * and non-interactive operations.
    * Use of this option requires a minimum of 1024 MiB of dedicated RAM.
+   * @readonly
    */
   public static readonly MemLimitSensitive: number = 1073741824;
 
@@ -169,6 +170,7 @@ export class SecurePass {
    * This memory limit, combined with OpsLimitSensitive, is recommended for highly sensitive data
    * and non-interactive operations.
    * Using this option it takes around 3.5 seconds to derrive a hash on a 2.8Ghz Core i7 CPU.
+   * @readonly
    */
   public static readonly OpsLimitSensitive: number = 4;
 
