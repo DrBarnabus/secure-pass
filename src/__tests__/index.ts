@@ -319,7 +319,7 @@ describe('SecurePass', () => {
     });
 
     test.each([SecurePass.PasswordBytesMin, SecurePass.PasswordBytesMax])(
-      'Should return a hash if given a password buffer of length %1.',
+      'Should return a hash if given a password buffer of length %i.',
       async (p, done) => {
         const sp = new SecurePass();
         const password = Buffer.alloc(p, 'f');
@@ -369,7 +369,7 @@ describe('SecurePass', () => {
     });
 
     test.each([SecurePass.PasswordBytesMin, SecurePass.PasswordBytesMax])(
-      'Should return a hash if given a password buffer of length %1.',
+      'Should return a hash if given a password buffer of length %i.',
       async (p, done) => {
         const sp = new SecurePass();
         const password = Buffer.alloc(p, 'f');
