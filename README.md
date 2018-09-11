@@ -55,14 +55,25 @@ async function main() {
 
   // Hash Verification returns an enumerator for easy validation of passwords against hashes.
   const result = await sp.verifyHash(password, hash);
-  if (result == VerificationResult.InvalidOrUnrecognised) { 
+  if (SecurePass.isInvalidOrUnrecognized(result)) { 
     console.log('Hash not created by SecurePass or invalid');
-  } else if (result == VerificationResult.Invalid) {
+  } else if (SecurePass.isInvalid(result)) {
     console.log('Password not valid when compared with supplied hash');
-  } else if (result == VerificationResult.Valid) {
+  } else if (SecurePass.isValid(result)) {
     console.log('Password and Hash are a match');
-  } else if (result == VerificationResult.ValidNeedsRehash) {
+  } else if (SecurePass.isValidNeedsRehash(result)) {
     console.log('Password and Hash are a match, but the security of the hash could be improved by rehashing.');
+  }
+
+  // Generation of one time authentication codes.
+  const otac = SecurePass.generateOneTimeAuthCode(Buffer.from('DrBarnabus'));
+
+  // Validate the one time authentication code with the random key.
+  // The random key should never be sent with the code, and should be kept secret.
+  if (SecurePass.verifyOneTimeAuthCode(otac.code, otac.key)) {
+    console.log('OTA Code is valid!');
+  } else {
+    console.log('OTA Code is invalid!');
   }
 }
 
