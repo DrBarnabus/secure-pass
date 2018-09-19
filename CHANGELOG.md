@@ -1,6 +1,14 @@
 # Changelog
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.0] - 2018-09-19
+
+First major release of the package. This version will receive full support if any issues are identified as it is no longer deemed to be a "development version".
+
+### Added
+
+- Added a check in `verifyOneTimeAuthCode()` to validate that the auth code is in the correct format before attempting to separate the code into mac and message. The function will now return false if the code doesn't pass the validation instead of attempting to verify.
+
 ## [0.2.2] - 2018-09-10
 ### Added
 
