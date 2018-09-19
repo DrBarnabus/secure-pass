@@ -303,6 +303,16 @@ describe('SecurePass', () => {
       const result = SecurePass.verifyOneTimeAuthCode(otac.code, badKey);
       expect(result).toBeFalsy();
     });
+
+    test.each([
+      ['Empty String', ''],
+      ['Missing ~', 'Ba54a9f'],
+      ['Missing base64', '~']
+    ])('Should return false, if the code is in an invalid format (%s)', (reason, code) => {
+      const otac = SecurePass.generateOneTimeAuthCode(Buffer.from('SecurePass'));
+      const result = SecurePass.verifyOneTimeAuthCode(code, otac.key);
+      expect(result).toBeFalsy();
+    });
   });
 
   describe('async/promise hashPassword()', () => {
