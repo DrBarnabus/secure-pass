@@ -13,17 +13,17 @@
     "prepare": "yarn build"
   },
   "dependencies": {
-    "sodium-native": "^2.2.1"
+    "sodium-native": "^2.2.3"
   },
   "devDependencies": {
-    "@types/jest": "^23.3.1",
-    "@types/supertest": "^2.0.5",
-    "jest": "^23.5.0",
-    "ts-jest": "^23.1.4",
+    "@types/jest": "^23.3.10",
+    "@types/supertest": "^2.0.7",
+    "jest": "^23.6.0",
+    "ts-jest": "^23.10.5",
     "tslint": "^5.11.0",
-    "typedoc": "^0.12.0",
+    "typedoc": "^0.13.0",
     "typedoc-plugin-external-module-name": "^1.1.3",
-    "typescript": "^3.0.3"
+    "typescript": "^3.2.2"
   },
   "jest": {
     "transform": {
