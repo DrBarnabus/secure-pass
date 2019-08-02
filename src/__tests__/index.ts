@@ -67,7 +67,7 @@ describe('SecurePass', () => {
       [VerificationResult.Valid, false],
       [VerificationResult.ValidNeedsRehash, false]
     ])('isInvalidOrUnrecognized should return the correct result when called with %i.', (vr, b) => {
-      expect(SecurePass.isInvalidOrUnrecognized(vr)).toEqual(b);
+      expect(SecurePass.isInvalidOrUnrecognized(vr as VerificationResult)).toEqual(b);
     });
 
     test.each([
@@ -76,7 +76,7 @@ describe('SecurePass', () => {
       [VerificationResult.Valid, false],
       [VerificationResult.ValidNeedsRehash, false]
     ])('isInvalid should return the correct result when called with %i.', (vr, b) => {
-      expect(SecurePass.isInvalid(vr)).toEqual(b);
+      expect(SecurePass.isInvalid(vr as VerificationResult)).toEqual(b);
     });
 
     test.each([
@@ -85,7 +85,7 @@ describe('SecurePass', () => {
       [VerificationResult.Valid, true],
       [VerificationResult.ValidNeedsRehash, false]
     ])('isValid should return the correct result when called with %i.', (vr, b) => {
-      expect(SecurePass.isValid(vr)).toEqual(b);
+      expect(SecurePass.isValid(vr as VerificationResult)).toEqual(b);
     });
 
     test.each([
@@ -94,7 +94,7 @@ describe('SecurePass', () => {
       [VerificationResult.Valid, false],
       [VerificationResult.ValidNeedsRehash, true]
     ])('isValidNeedsRehash should return the correct result when called with %i.', (vr, b) => {
-      expect(SecurePass.isValidNeedsRehash(vr)).toEqual(b);
+      expect(SecurePass.isValidNeedsRehash(vr as VerificationResult)).toEqual(b);
     });
   });
 
@@ -331,31 +331,27 @@ describe('SecurePass', () => {
     // Removed password bytes max as it was killing travis.
     test.each([SecurePass.PasswordBytesMin])(
       'Should return a hash if given a password buffer of length %i.',
-      async (p, done) => {
+      async (p) => {
         const sp = new SecurePass();
         const password = Buffer.alloc(p, 'f');
         const hash = await sp.hashPassword(password);
 
         expect(hash.length).toEqual(SecurePass.HashBytes);
         expect(hash.indexOf('$argon2id')).toEqual(0);
-
-        done();
       }
     );
 
     test.each([SecurePass.PasswordBytesMin - 1, SecurePass.PasswordBytesMax + 1])(
       'Should throw an error if given a password buffer of length %i.',
-      async (p, done) => {
+      async (p) => {
         try {
           const sp = new SecurePass();
           const password = Buffer.alloc(p, 'f');
           const hash = await sp.hashPassword(password);
 
           expect(false).toBeTruthy();
-          done();
         } catch (e) {
           expect(e).toBeDefined();
-          done();
         }
       }
     );
@@ -382,7 +378,7 @@ describe('SecurePass', () => {
     // Removed Maximum Check, as it was killing Travis.
     test.each([SecurePass.PasswordBytesMin])(
       'Should return a hash if given a password buffer of length %i.',
-      async (p, done) => {
+      async (p) => {
         const sp = new SecurePass();
         const password = Buffer.alloc(p, 'f');
         sp.hashPassword(password, (err: SecurePassError | null, hash?: Buffer) => {
@@ -393,15 +389,13 @@ describe('SecurePass', () => {
 
           expect(hash.length).toEqual(SecurePass.HashBytes);
           expect(hash.indexOf('$argon2id')).toEqual(0);
-
-          done();
         });
       }
     );
 
     test.each([SecurePass.PasswordBytesMin - 1, SecurePass.PasswordBytesMax + 1])(
       'Should throw an error if given a password buffer of length %i.',
-      async (p, done) => {
+      async (p) => {
         const sp = new SecurePass();
 
         try {
@@ -410,12 +404,9 @@ describe('SecurePass', () => {
           sp.hashPassword(password, (err: SecurePassError | null, hash?: Buffer) => {
             expect(err instanceof SecurePassError).toBeTruthy();
             expect(hash).toBeUndefined();
-
-            done();
           });
         } catch (e) {
           expect(e).toBeDefined();
-          done();
         }
       }
     );
@@ -437,31 +428,27 @@ describe('SecurePass', () => {
     // Removed password bytes max as it was killing travis.
     test.each([SecurePass.PasswordBytesMin])(
       'Should return a hash if given a password buffer of length %1.',
-      (p, done) => {
+      (p) => {
         const sp = new SecurePass();
         const password = Buffer.alloc(p, 'f');
         const hash = sp.hashPasswordSync(password);
 
         expect(hash.length).toEqual(SecurePass.HashBytes);
         expect(hash.indexOf('$argon2id')).toEqual(0);
-
-        done();
       }
     );
 
     test.each([SecurePass.PasswordBytesMin - 1, SecurePass.PasswordBytesMax + 1])(
       'Should throw an error if given a password buffer of length %i.',
-      (p, done) => {
+      (p) => {
         try {
           const sp = new SecurePass();
           const password = Buffer.alloc(p, 'f');
           const hash = sp.hashPasswordSync(password);
 
           expect(false).toBeTruthy();
-          done();
         } catch (e) {
           expect(e).toBeDefined();
-          done();
         }
       }
     );

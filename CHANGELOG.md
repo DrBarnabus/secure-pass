@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.2] - 2019-08-02
+
+Updated package dependencies and re-released.
+
 ## [1.0.1] - 2018-12-12
 
 Updated package dependencies and re-released.
@@ -71,7 +75,8 @@ First major release of the package. This version will receive full support if an
 - Added `verifyHash()` function, the function takes a password and a hash as buffers and provides a `VerificationResult` as an output. The function can work with any of the following return methods; async/await, promise or callback.
 
 <!-- Links -->
-[Unreleased]: https://github.com/DrBarnabus/secure-pass/compare/v1.0.0...HEAD
+[1.0.2]: https://github.com/DrBarnabus/secure-pass/compare/v1.0.1...v1.0.2
+[1.0.1]: https://github.com/DrBarnabus/secure-pass/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/DrBarnabus/secure-pass/compare/v0.2.1...v1.0.0
 [0.2.1]: https://github.com/DrBarnabus/secure-pass/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/DrBarnabus/secure-pass/compare/v0.1.3...v0.2.0

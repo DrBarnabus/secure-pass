@@ -1,6 +1,6 @@
 {
   "name": "argon2-pass",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "State of the art password hashing and one time password reset token generation module written in TypeScript for nodejs.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -13,17 +13,17 @@
     "prepare": "yarn build"
   },
   "dependencies": {
-    "sodium-native": "^2.2.3"
+    "sodium-native": "^2.4.3"
   },
   "devDependencies": {
-    "@types/jest": "^23.3.10",
-    "@types/supertest": "^2.0.7",
-    "jest": "^23.6.0",
-    "ts-jest": "^23.10.5",
-    "tslint": "^5.11.0",
-    "typedoc": "^0.13.0",
-    "typedoc-plugin-external-module-name": "^1.1.3",
-    "typescript": "^3.2.2"
+    "@types/jest": "^24.0.16",
+    "@types/supertest": "^2.0.8",
+    "jest": "^24.8.0",
+    "ts-jest": "^24.0.2",
+    "tslint": "^5.18.0",
+    "typedoc": "^0.15.0",
+    "typedoc-plugin-external-module-name": "^2.1.0",
+    "typescript": "^3.5.3"
   },
   "jest": {
     "transform": {
